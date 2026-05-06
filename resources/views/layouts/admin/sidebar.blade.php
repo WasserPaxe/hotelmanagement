@@ -44,10 +44,10 @@
                             <div class="collapse" id="sidebarPages">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="pages-starter.html">Listar Utentes</a>
+                                        <a href="{{ route('customer.index') }}">Listar Utentes</a>
                                     </li>
                                     <li>
-                                        <a href="pages-contact-list.html">Adicionar Utente</a>
+                                        <a href="{{ route('customer.create') }}">Adicionar Utente</a>
                                     </li>
                                 </ul>
                             </div>

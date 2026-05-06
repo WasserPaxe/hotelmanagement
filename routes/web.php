@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.customers.create.index');
+    return view('layouts.admin.main');
 });
+
+Route::get('/customer/', 'CustomerController@create')->name('customer.create');
+Route::post('/customer/create', 'CustomerController@store')->name('customer.store');
+Route::get('/customer/list', 'CustomerController@index')->name('customer.index');
+Route::delete('/customer/delete/{id}', 'CustomerController@destroy')->name('customer.delete');
+Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('customer.edit');
+

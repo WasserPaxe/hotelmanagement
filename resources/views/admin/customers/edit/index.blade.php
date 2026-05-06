@@ -1,5 +1,5 @@
 @extends('layouts.admin.main')
-@section('title', 'Adicionar Utentes')
+@section('title', 'Editar Utentes')
 @section('content')
 
 <div class="row">
@@ -9,7 +9,6 @@
                                     <h4 class="header-title">Utentes</h4>
                                     
                                 </div>
-                                @include('extras.error.index')
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('customer.store') }}">
                                         @csrf
