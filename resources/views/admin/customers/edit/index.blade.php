@@ -10,8 +10,9 @@
                                     
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('customer.store') }}">
+                                    <form method="POST" action="{{ route('customer.update', $customers->id) }}">
                                         @csrf
+                                        @method('PUT')
                                         @include('forms.admin._formCustomer.index')
                                     </form>    
                                         </div>

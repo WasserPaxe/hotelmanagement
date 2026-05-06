@@ -26,12 +26,15 @@ class CustomerController extends Controller
 
          $validatedData = $this->validate($request,[
             'name' => 'required',
-            'email' => 'required',
             'phone' => 'required',
-            'nationality' => 'required',
             'docnumber' => 'required',
-            'gender' => 'required'
-        ], ['name.required'=>'Nome obrigatorio',
+            'gender' => 'required'], 
+            
+            ['name.required'=>'Campo obrigatório',
+            'phone.required'=>'Campo obrigatório',
+            'docnumber.required'=>'Campo obrigatório',
+            'gender.required'=>'Campo obrigatório',
+
         ]);
 
         $customers->name = $request->name;
@@ -48,12 +51,31 @@ class CustomerController extends Controller
     public function destroy($id){
         $customers = Customer::findOrFail($id);
         $customers->delete();
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('success', 'Cliente Excluído Com Sucesso');
     }
 
     public function edit($id){
         $customers = Customer::findOrFail($id);
         return view('admin.customers.edit.index', compact('customers'));
+    }
+
+    public function update(Request $request){
+        $validatedData = $this->validate($request,[
+            'name' => 'required',
+            'phone' => 'required',
+            'docnumber' => 'required',
+            'gender' => 'required'], 
+            
+            ['name.required'=>'Campo obrigatório',
+            'phone.required'=>'Campo obrigatório',
+            'docnumber.required'=>'Campo obrigatório',
+            'gender.required'=>'Campo obrigatório',
+
+        ]);
+
+        $customers = Customer::findOrFail($request->id)->update($request->all());
+        return redirect()->route('customer.index')->with('update', 'Cliente Atualizado Com Sucesso');;
+
     }
     
 }

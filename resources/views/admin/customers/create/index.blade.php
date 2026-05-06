@@ -9,7 +9,7 @@
                                     <h4 class="header-title">Utentes</h4>
                                     
                                 </div>
-                                @include('extras.error.index')
+                           
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('customer.store') }}">
                                         @csrf

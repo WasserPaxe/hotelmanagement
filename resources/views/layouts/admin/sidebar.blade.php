@@ -11,7 +11,7 @@
                 </a>
 
                 <!-- Brand Logo Dark -->
-                <a href="index.html" class="logo logo-dark">
+                <a href="\" class="logo logo-dark">
                     <span class="logo-lg">
                         <img src="{{ asset('assets/images/logo-dark.png') }}" alt="dark logo">
                     </span>
