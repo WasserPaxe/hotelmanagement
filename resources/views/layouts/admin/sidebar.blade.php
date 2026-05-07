@@ -36,12 +36,12 @@
                         </li>
 
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                            <a data-bs-toggle="collapse" href="#sidebarUtentes" aria-expanded="false" aria-controls="sidebarUtentes" class="side-nav-link">
                                 <i class="ri-pages-line"></i>
                                 <span> Utentes </span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <div class="collapse" id="sidebarPages">
+                            <div class="collapse" id="sidebarUtentes">
                                 <ul class="side-nav-second-level">
                                     <li>
                                         <a href="{{ route('customer.index') }}">Listar Utentes</a>
@@ -52,54 +52,41 @@
                                 </ul>
                             </div>
                         </li>
-
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                            <a data-bs-toggle="collapse" href="#sidebarCategories" aria-expanded="true" aria-controls="sidebarCategories" class="side-nav-link">
                                 <i class="ri-pages-line"></i>
-                                <span> Quartos </span>
+                                <span> Categorias</span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <div class="collapse" id="sidebarPages">
+                            <div class="collapse" id="sidebarCategories">
                                 <ul class="side-nav-second-level">
-                                    <li>
+                                    
+                                   <li>
                                         <a href="{{ route('categorie.index') }}">Listar Categorias</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('categorie.create') }}">Adicionar Categorias</a>
                                     </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarRooms" aria-expanded="false" aria-controls="sidebarRooms" class="side-nav-link">
+                                <i class="ri-pages-line"></i>
+                                <span> Quartos </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarRooms">
+                                <ul class="side-nav-second-level">
+                                    
                                     <li>
                                         <a href="{{ route('room.index') }}">Listar Quartos</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('room.create') }}">Adicionar Quarto</a>
                                     </li>
-                                    {{-- <li>
-                                        <a href="pages-profile.html">Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="pages-timeline.html">Timeline</a>
-                                    </li>
-                                    <li>
-                                        <a href="pages-invoice.html">Invoice</a>
-                                    </li>
-                                    <li>
-                                        <a href="pages-faq.html">FAQ</a>
-                                    </li>
-                                    <li>
-                                        <a href="pages-pricing.html">Pricing</a>
-                                    </li>
-                                    <li>
-                                        <a href="pages-maintenance.html">Maintenance</a>
-                                    </li>
-                                    <li>
-                                        <a href="error-404.html">Error 404</a>
-                                    </li>
-                                    <li>
-                                        <a href="error-404-alt.html">Error 404-alt</a>
-                                    </li>
-                                    <li>
-                                        <a href="error-500.html">Error 500</a>
-                                    </li> --}}
+                                   
                                 </ul>
                             </div>
                         </li>

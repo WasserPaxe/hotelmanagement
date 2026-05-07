@@ -25,6 +25,7 @@ Route::get('/customer/list', 'CustomerController@index')->name('customer.index')
 Route::delete('/customer/delete/{id}', 'CustomerController@destroy')->name('customer.delete');
 Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('customer.edit');
 Route::put('/customer/update/{id}', 'CustomerController@update')->name('customer.update');
+Route::get('/customer/details/{id}', 'CustomerController@show')->name('customer.show');
 
 //Categories Route
 
@@ -43,3 +44,4 @@ Route::get('/room/list', 'RoomController@index')->name('room.index');
 Route::delete('/room/delete/{id}', 'RoomController@destroy')->name('room.delete');
 Route::get('/room/edit/{id}', 'RoomController@edit')->name('room.edit');
 Route::put('/room/update/{id}', 'RoomController@update')->name('room.update');
+Route::get('/room/details/{id}', 'RoomController@show')->name('room.show');

@@ -51,6 +51,7 @@
                                                 <td>{{$room->status}}</td>
                                                
                                                 <td>
+                                                    <a href="{{ route('room.show', $room->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
                                                     <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
                                                     <form style="display:inline" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
                                                 </td>

@@ -53,6 +53,12 @@ class RoomController extends Controller
         return redirect()->route('room.index')->with('success', 'Quarto Adicionado com Sucesso');
     }
 
+     public function show($id){
+        $categories = Categorie::all();
+        $rooms = Room::findOrFail($id);
+        return view('admin.rooms.details.index', compact('rooms', 'categories'));
+    }
+
     public function edit($id){
         $categories = Categorie::all();
         $rooms = Room::findOrFail($id);

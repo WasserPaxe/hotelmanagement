@@ -53,6 +53,7 @@
                                                 <td>{{$customer->docnumber}}</td>
                                                 <td>{{ $customer->gender }}</td>
                                                 <td>
+                                                    <a href="{{ route('customer.show', $customer->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
                                                     <a href="{{ route('customer.edit', $customer->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
                                                     <form style="display:inline" method="POST" action="{{ route('customer.delete', $customer->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
                                                 </td>

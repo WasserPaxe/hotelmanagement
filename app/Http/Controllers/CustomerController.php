@@ -49,6 +49,12 @@ class CustomerController extends Controller
         return redirect()->route('customer.index')->with('success', 'Cliente Excluído Com Sucesso');
     }
 
+    public function show($id){
+        
+        $customers = Customer::findOrFail($id);
+        return view('admin.customers.details.index', compact('customers'));
+    }
+
     public function destroy($id){
         $customers = Customer::findOrFail($id);
         $customers->delete();
