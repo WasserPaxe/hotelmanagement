@@ -1,5 +1,5 @@
 @extends('layouts.admin.main')
-@section('title', 'Listar Utentes')
+@section('title', 'Listar Quartos')
 @section('content')
 
 <div class="row">
@@ -24,37 +24,35 @@
                                         <span >{{session('delete')}}</span>
                                 </div>
                                 @endif
-                                
 
                                 <div class="card-header">
-                                    <h4 class="header-title">Todos Utentes</h4>
+                                    <h4 class="header-title">Todos Quartos</h4>
                                 </div>
                                 <div class="card-body">
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
-                                                <th>Nome</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Nacionalidade</th>
-                                                <th>Nº Documento</th>
-                                                <th>Gênero</th>
+                                                <th>Numero</th>
+                                                <th>Piso</th>
+                                                <th>Categoria</th>
+                                                <th>Condicoes</th>
+                                                <th>Estado</th>
                                                 <th>Acções </th>
                                             </tr>
                                         </thead>
 
-                                       @forelse($customers as $customer)     
+                                       @forelse($rooms as $room)     
                                         <tbody>
                                             <tr>
-                                                <td>{{$customer->name}}</td>
-                                                <td>{{$customer->email}}</td>
-                                                <td>{{$customer->phone}}</td>
-                                                <td>{{$customer->nationality}}</td>                  
-                                                <td>{{$customer->docnumber}}</td>
-                                                <td>{{ $customer->gender }}</td>
+                                                <td>{{$room->number}}</td>
+                                                <td>{{$room->floor}}</td>
+                                                <td>{{$room->categorie->name}}</td>
+                                                <td>{{$room->conditions}}</td>
+                                                <td>{{$room->status}}</td>
+                                               
                                                 <td>
-                                                    <a href="{{ route('customer.edit', $customer->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
-                                                    <form style="display:inline" method="POST" action="{{ route('customer.delete', $customer->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
+                                                    <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
+                                                    <form style="display:inline" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
                                                 </td>
                                             </tr>
                                         </tbody>

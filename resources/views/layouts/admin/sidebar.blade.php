@@ -56,18 +56,24 @@
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                                 <i class="ri-pages-line"></i>
-                                <span> Pages </span>
+                                <span> Quartos </span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <div class="collapse" id="sidebarPages">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="pages-starter.html">Starter Page</a>
+                                        <a href="{{ route('categorie.index') }}">Listar Categorias</a>
                                     </li>
                                     <li>
-                                        <a href="pages-contact-list.html">Contact List</a>
+                                        <a href="{{ route('categorie.create') }}">Adicionar Categorias</a>
                                     </li>
                                     <li>
+                                        <a href="{{ route('room.index') }}">Listar Quartos</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('room.create') }}">Adicionar Quarto</a>
+                                    </li>
+                                    {{-- <li>
                                         <a href="pages-profile.html">Profile</a>
                                     </li>
                                     <li>
@@ -93,13 +99,13 @@
                                     </li>
                                     <li>
                                         <a href="error-500.html">Error 500</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </li>
                         
 
-                        <li class="side-nav-item">
+                        {{-- <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
                                 <i class="ri-group-2-line"></i>
                                 <span> Authentication </span>
@@ -446,7 +452,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </li>

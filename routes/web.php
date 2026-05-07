@@ -17,10 +17,29 @@ Route::get('/', function () {
     return view('admin.dash.index');
 });
 
+//Customer Route
+
 Route::get('/customer/', 'CustomerController@create')->name('customer.create');
-Route::post('/customer/create', 'CustomerController@store')->name('customer.store');
+Route::post('/customer/add', 'CustomerController@store')->name('customer.store');
 Route::get('/customer/list', 'CustomerController@index')->name('customer.index');
 Route::delete('/customer/delete/{id}', 'CustomerController@destroy')->name('customer.delete');
 Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('customer.edit');
 Route::put('/customer/update/{id}', 'CustomerController@update')->name('customer.update');
 
+//Categories Route
+
+Route::get('/room/categories', 'CategorieController@create')->name('categorie.create');
+Route::post('/room/categories/add', 'CategorieController@store')->name('categorie.store');
+Route::get('/room/categories/list', 'CategorieController@index')->name('categorie.index');
+Route::get('/room/categorie/edit/{id}', 'CategorieController@edit')->name('categorie.edit');
+Route::put('/room/categorie/update/{id}', 'CategorieController@update')->name('categorie.update');
+Route::delete('/room/categories/delete/{id}', 'CategorieController@destroy')->name('categorie.delete');
+
+//Room Route
+
+Route::get('/room/create', 'RoomController@create')->name('room.create');
+Route::post('/room/add', 'RoomController@store')->name('room.store');
+Route::get('/room/list', 'RoomController@index')->name('room.index');
+Route::delete('/room/delete/{id}', 'RoomController@destroy')->name('room.delete');
+Route::get('/room/edit/{id}', 'RoomController@edit')->name('room.edit');
+Route::put('/room/update/{id}', 'RoomController@update')->name('room.update');

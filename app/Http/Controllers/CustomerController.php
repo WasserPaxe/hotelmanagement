@@ -45,13 +45,14 @@ class CustomerController extends Controller
         $customers->docnumber = $request->docnumber;
         $customers->gender = $request->gender;
         $customers->save();
-        return redirect()->route('customer.index');
+        
+        return redirect()->route('customer.index')->with('success', 'Cliente Excluído Com Sucesso');
     }
 
     public function destroy($id){
         $customers = Customer::findOrFail($id);
         $customers->delete();
-        return redirect()->route('customer.index')->with('success', 'Cliente Excluído Com Sucesso');
+        return redirect()->route('customer.index')->with('delete', 'Cliente Excluído Com Sucesso');
     }
 
     public function edit($id){
@@ -74,7 +75,7 @@ class CustomerController extends Controller
         ]);
 
         $customers = Customer::findOrFail($request->id)->update($request->all());
-        return redirect()->route('customer.index')->with('update', 'Cliente Atualizado Com Sucesso');;
+        return redirect()->route('customer.index')->with('update', 'Cliente Atualizado Com Sucesso');
 
     }
     

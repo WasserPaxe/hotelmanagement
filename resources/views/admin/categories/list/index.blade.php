@@ -1,5 +1,5 @@
 @extends('layouts.admin.main')
-@section('title', 'Listar Utentes')
+@section('title', 'Listar Categorias')
 @section('content')
 
 <div class="row">
@@ -27,34 +27,24 @@
                                 
 
                                 <div class="card-header">
-                                    <h4 class="header-title">Todos Utentes</h4>
+                                    <h4 class="header-title">Todas Categorias</h4>
                                 </div>
                                 <div class="card-body">
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Nacionalidade</th>
-                                                <th>Nº Documento</th>
-                                                <th>Gênero</th>
                                                 <th>Acções </th>
                                             </tr>
                                         </thead>
 
-                                       @forelse($customers as $customer)     
+                                       @forelse($categories as $categorie)     
                                         <tbody>
                                             <tr>
-                                                <td>{{$customer->name}}</td>
-                                                <td>{{$customer->email}}</td>
-                                                <td>{{$customer->phone}}</td>
-                                                <td>{{$customer->nationality}}</td>                  
-                                                <td>{{$customer->docnumber}}</td>
-                                                <td>{{ $customer->gender }}</td>
+                                                <td>{{$categorie->name}}</td>
                                                 <td>
-                                                    <a href="{{ route('customer.edit', $customer->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
-                                                    <form style="display:inline" method="POST" action="{{ route('customer.delete', $customer->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
+                                                    <a href="{{ route('categorie.edit', $categorie->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
+                                                    <form style="display:inline" method="POST" action={{ route('categorie.delete', $categorie->id) }}"">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
                                                 </td>
                                             </tr>
                                         </tbody>
