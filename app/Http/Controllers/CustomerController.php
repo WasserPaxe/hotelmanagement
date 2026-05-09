@@ -46,7 +46,7 @@ class CustomerController extends Controller
         $customers->gender = $request->gender;
         $customers->save();
         
-        return redirect()->route('customer.index')->with('success', 'Cliente Excluído Com Sucesso');
+        return redirect()->route('customer.index')->with('success', 'Cliente Adicionado Com Sucesso');
     }
 
     public function show($id){

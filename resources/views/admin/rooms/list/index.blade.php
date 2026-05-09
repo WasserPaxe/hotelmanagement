@@ -3,6 +3,17 @@
 @section('content')
 
 <div class="row">
+   <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/">Velonic</a></li>
+                                            <li class="breadcrumb-item"><a href="">Quartos</a></li>
+                                            <li class="breadcrumb-item active"><a href="{{ route('room.index') }}">Listar Quartos</a></li>
+                                            
+                                        </ol>
+                                    </div>
+                                 
+                                </div>
 
                         <div class="col-12">
                             
@@ -52,8 +63,8 @@
                                                
                                                 <td>
                                                     <a href="{{ route('room.show', $room->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
-                                                    <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary">Editar</button> </a>
-                                                    <form style="display:inline" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger">Excluir</button> </form>
+                                                    <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
+                                                    <form style="display:inline" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i> </button> </form>
                                                 </td>
                                             </tr>
                                         </tbody>

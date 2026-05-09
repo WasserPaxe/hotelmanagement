@@ -45,3 +45,13 @@ Route::delete('/room/delete/{id}', 'RoomController@destroy')->name('room.delete'
 Route::get('/room/edit/{id}', 'RoomController@edit')->name('room.edit');
 Route::put('/room/update/{id}', 'RoomController@update')->name('room.update');
 Route::get('/room/details/{id}', 'RoomController@show')->name('room.show');
+
+//Booking Route
+
+Route::get('booking/list', 'BookingController@index')->name('booking.index');
+Route::get('booking/create', 'BookingController@create')->name('booking.create');
+Route::post('booking/store', 'BookingController@store')->name('booking.store');
+Route::get('booking/edit/{id}', 'BookingController@edit')->name('booking.edit');
+Route::get('booking/details/{id}', 'BookingController@show')->name('booking.show');
+Route::put('booking/update/{id}', 'BookingController@update')->name('booking.update');
+Route::delete('booking/delete/{id}', 'BookingController@destroy')->name('booking.delete');

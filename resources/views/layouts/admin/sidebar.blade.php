@@ -37,7 +37,7 @@
 
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarUtentes" aria-expanded="false" aria-controls="sidebarUtentes" class="side-nav-link">
-                                <i class="ri-pages-line"></i>
+                                 <i class="ri-user-line"></i>
                                 <span> Utentes </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -73,7 +73,7 @@
 
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarRooms" aria-expanded="false" aria-controls="sidebarRooms" class="side-nav-link">
-                                <i class="ri-pages-line"></i>
+                                <i class="ri-home-2-line"></i>
                                 <span> Quartos </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -87,6 +87,25 @@
                                         <a href="{{ route('room.create') }}">Adicionar Quarto</a>
                                     </li>
                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarbookings" aria-expanded="true" aria-controls="sidebarbookings" class="side-nav-link">
+                                <i class="ri-pages-line"></i>
+                                <span> Reservas</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarbookings">
+                                <ul class="side-nav-second-level">
+                                    
+                                   <li>
+                                        <a href="{{ route('booking.index') }}">Listar Reservas</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('booking.create') }}">Adicionar Reserva</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

@@ -2,6 +2,17 @@
 @section('title','Detalhes')
 @section('content')
  <div class="row">
+    <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/">Velonic</a></li>
+                                            <li class="breadcrumb-item"><a href="">Utente</a></li>
+                                            <li class="breadcrumb-item active"><a href="{{ route('customer.show', $customers->id) }}">Detalhes Utente</a></li>
+                                        </ol>
+                                    </div>
+                                 
+                                </div>
+    
                         <div class="col-sm-12 mt-2">
                             <div class="card p-0">
                                 <div class="card-body p-0">

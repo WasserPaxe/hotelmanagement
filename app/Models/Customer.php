@@ -10,4 +10,8 @@ class Customer extends Model
         'name', 'email', 'phone', 'nationality', 
         'doctype', 'docnumber', 'gender'
     ];
+
+    public function booking(){
+        return $this->hasMany('App\Models\Booking');
+    }
 }
