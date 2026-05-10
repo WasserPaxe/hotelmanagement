@@ -46,6 +46,15 @@ Route::get('/room/edit/{id}', 'RoomController@edit')->name('room.edit');
 Route::put('/room/update/{id}', 'RoomController@update')->name('room.update');
 Route::get('/room/details/{id}', 'RoomController@show')->name('room.show');
 
+//Commodity Route
+
+Route::get('/commodity/list', 'CommodityController@index')->name('commodity.index');
+Route::get('/commodity/create', 'CommodityController@create')->name('commodity.create');
+Route::post('/commodity/add', 'CommodityController@store')->name('commodity.store');
+Route::get('/commodity/edit/{id}', 'CommodityController@edit')->name('commodity.edit');
+Route::put('/commodity/update/{id}', 'CommodityController@update')->name('commodity.update');
+Route::delete('/commodity/delete/{id}', 'CommodityController@destroy')->name('commodity.delete');
+
 //Booking Route
 
 Route::get('booking/list', 'BookingController@index')->name('booking.index');

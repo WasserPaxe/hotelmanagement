@@ -25,7 +25,7 @@
                     <!--- Sidemenu -->
                     <ul class="side-nav">
 
-                        <li class="side-nav-title">Main</li>
+                        <li class="side-nav-title"></li>
 
                         <li class="side-nav-item">
                             <a href="\" class="side-nav-link">
@@ -54,7 +54,7 @@
                         </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarCategories" aria-expanded="true" aria-controls="sidebarCategories" class="side-nav-link">
-                                <i class="ri-pages-line"></i>
+                                <i class="bi bi-tags"></i>
                                 <span> Categorias</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -66,6 +66,25 @@
                                     </li>
                                     <li>
                                         <a href="{{ route('categorie.create') }}">Adicionar Categorias</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarCommodities" aria-expanded="true" aria-controls="sidebarCommodities" class="side-nav-link">
+                                <i class="bi bi-tags"></i>
+                                <span> Comodidades</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarCommodities">
+                                <ul class="side-nav-second-level">
+                                    
+                                   <li>
+                                        <a href="{{ route('commodity.index') }}">Listar Comodidades</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('commodity.create') }}">Adicionar Comodidades</a>
                                     </li>
                                 </ul>
                             </div>
@@ -93,7 +112,7 @@
 
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarbookings" aria-expanded="true" aria-controls="sidebarbookings" class="side-nav-link">
-                                <i class="ri-pages-line"></i>
+                                <i class="bi bi-house-check"></i>
                                 <span> Reservas</span>
                                 <span class="menu-arrow"></span>
                             </a>

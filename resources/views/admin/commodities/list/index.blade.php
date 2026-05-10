@@ -1,16 +1,15 @@
 @extends('layouts.admin.main')
-@section('title', 'Listar Reservas')
+@section('title', 'Listar Categorias')
 @section('content')
 
 <div class="row">
+
     <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="/">Velonic</a></li>
-                                            <li class="breadcrumb-item"><a href="">Reservas</a></li>
-                                            <li class="breadcrumb-item active"><a href="{{ route('booking.index') }}">Listar Reservas</a></li>
-                                            
-                                            
+                                            <li class="breadcrumb-item"><a href="">Comodidades</a></li>
+                                            <li class="breadcrumb-item active"><a href="{{ route('commodity.index') }}">Listar Comodidades</a></li>
                                         </ol>
                                     </div>
                                  
@@ -18,8 +17,9 @@
 
                         <div class="col-12">
                             
+                            
                             <div class="card mt-2">
-                                @if(session('success'))
+                           @if(session('success'))
                                  <div class="alert alert-info alert-dismissible fade show" role="alert">
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         <span >{{session('success')}}</span>
@@ -35,49 +35,33 @@
                                         <span >{{session('delete')}}</span>
                                 </div>
                                 @endif
-                            
-                           
+                                
+
                                 <div class="card-header">
-                                    <h4 class="header-title">Todas Reservas</h4>
+                                    <h4 class="header-title">Todas Comodidades</h4>
                                 </div>
                                 <div class="card-body">
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
-                                                <th>Nome </th>
-                                                <th>Quarto</th>
-                                                <th>Categoria</th>
-                                                <th>CheckIN</th>
-                                                <th>CheckOut</th>
-                                                <th>Descricao</th>
-                                                <th>Estado</th>
+                                                <th>Nome</th>
+                                                <th>Preço</th>
                                                 <th>Acções </th>
                                             </tr>
                                         </thead>
 
-                                       @forelse($bookings as $booking)   
+                                       @forelse($commodities as $commodity)     
                                         <tbody>
                                             <tr>
-                                                <td>{{$booking->customer->name}}</td>
-                                                
-                                                <td>{{$booking->room->number }}</td>
-                                             
-                                              
-                                                <td>{{$booking->room->categorie->name }}</td>
-                                           
-                                                <td>{{$booking->checkin}}</td>
-                                                <td>{{$booking->checkout}}</td>
-                                                <td>{{$booking->description}}</td>
-                                                <td>{{$booking->status}}</td>
-                                               
+                                                <td>{{$commodity->name}}</td>
+                                                <td>{{$commodity->price}}</td>
                                                 <td>
-                                                    <a href="{{ route('booking.show', $booking->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
-                                                    <a href="{{ route('booking.edit', $booking->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
-                                                    <form style="display:inline" method="POST" action="{{ route('booking.delete', $booking->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>
+                                                    <a href="{{ route('commodity.edit', $commodity->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
+                                                    <form style="display:inline" method="POST" action="{{ route('commodity.delete', $commodity->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>
                                                 </td>
                                             </tr>
                                         </tbody>
-                                       @empty
+                                        @empty
                                         
                                         @endforelse
                                     </table>
@@ -88,4 +72,3 @@
                     </div> 
 
 @endsection
-
