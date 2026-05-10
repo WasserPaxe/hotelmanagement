@@ -10,5 +10,7 @@ class Commodity extends Model
         'name', 'price',
     ];
 
-    
+    public function booking(){
+        return $this->belongsToMany('App\Models\Booking');
+    }
 }

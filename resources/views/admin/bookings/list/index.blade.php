@@ -50,6 +50,7 @@
                                                 <th>CheckIN</th>
                                                 <th>CheckOut</th>
                                                 <th>Descricao</th>
+                                                <th>Comodidades</th>
                                                 <th>Estado</th>
                                                 <th>Acções </th>
                                             </tr>
@@ -64,10 +65,18 @@
                                              
                                               
                                                 <td>{{$booking->room->categorie->name }}</td>
-                                           
                                                 <td>{{$booking->checkin}}</td>
                                                 <td>{{$booking->checkout}}</td>
                                                 <td>{{$booking->description}}</td>
+                                                <td>
+                                                    @if ($booking->commodities->isNotEmpty())
+                                                        @foreach ($booking->commodities as $commodity )
+                                                            <span>{{$commodity->name}}</span>
+                                                        @endforeach
+                                                    @else
+                                                        <span class="text-muted"></span>
+                                                    @endif
+                                                </td>
                                                 <td>{{$booking->status}}</td>
                                                
                                                 <td>

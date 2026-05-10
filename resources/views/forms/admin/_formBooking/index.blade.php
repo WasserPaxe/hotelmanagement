@@ -49,7 +49,19 @@
                                                 @error('checkin')
                                                     <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
                                                 @enderror 
-                           
+                                                
+                                                <div class="mb-3">
+                                                    <label for="example-select" name="status" class="form-label">Estado</label>
+                                                    <select class="form-select @error('status') is-invalid @enderror"  name="status" id="example-select">
+                                                        <option value="">Selecione</option>
+                                                        <option value="Disponivel" value="Confirmado" {{ isset($bookings->status) && $bookings->status == 'Confirmado' ? 'selected' : old('status') }}>Confirmado</option>
+                                                        <option value="Pendente"{{ isset($bookings->status) && $bookings->status == 'Pendente' ? 'selected' : old('status') }}>Pendente</option>
+                                                       
+                                                    </select>
+                                                    @error('status')
+                                                        <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
+                                                    @enderror 
+                                                </div>
 
                                             </div>
 
@@ -89,19 +101,28 @@
                                                     <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
                                                 @enderror
 
-                                                <div class="mb-3">
-                                                    <label for="example-select" name="status" class="form-label">Estado</label>
-                                                    <select class="form-select @error('status') is-invalid @enderror"  name="status" id="example-select">
-                                                        <option value="">Selecione</option>
-                                                        <option value="Disponivel" value="Confirmado" {{ isset($bookings->status) && $bookings->status == 'Confirmado' ? 'selected' : old('status') }}>Confirmado</option>
-                                                        <option value="Pendente"{{ isset($bookings->status) && $bookings->status == 'Pendente' ? 'selected' : old('status') }}>Pendente</option>
-                                                       
-                                                    </select>
-                                                    @error('status')
-                                                        <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
-                                                    @enderror 
-                                                </div>
                                                 
+                                                <div class="mb-3">
+                                                    <label class="form-label">Comodidades</label>
+                                                    <div class="row">
+                                                        @foreach ($commodities as $commodity)
+                                                            <div class="col-md-4">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" 
+                                                                        type="checkbox" 
+                                                                        name="commodities[]" 
+                                                                        value="{{ $commodity->id }}" 
+                                                                        id="commodity_{{ $commodity->id }}"
+                                                                        {{ in_array($commodity->id, old('commodities', [])) ? 'checked' : '' }}>
+                                                                    <label class="form-check-label" for="commodity_{{ $commodity->id }}">
+                                                                        {{ $commodity->name }} 
+                                                                        ({{ number_format($commodity->price, 2) }} €)
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                                
                                                 
                                             </div>
