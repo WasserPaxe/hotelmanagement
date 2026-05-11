@@ -7,29 +7,30 @@ use App\Models\Customer;
 use App\Models\Room;
 use App\Models\Categorie;
 use App\Models\Booking;
-use App\Models\Commodity;
+
 
 
 class BookingController extends Controller
 {
     public function index(){
-        $commodities = Commodity::all();
+
         $rooms = Room::all();
         $customers = Customer::all();
         $categories = Categorie::all();
         $bookings = Booking::all();
 
-        return view('admin.bookings.list.index', compact('bookings', 'customers', 'rooms','categories', 'commodities'));
+        return view('admin.bookings.list.index', compact('bookings', 'customers', 'rooms','categories'));
 
     }
 
-    public function create(){
+    public function create(Customer $customer){
+
+        
         $categories =  Categorie::all();
-        $commodities = Commodity::all();
-        $customers = Customer::all();
+      
         $rooms = Room::all();
 
-        return view('admin.bookings.create.index', compact('customers', 'rooms', 'commodities', 'categories'));
+        return view('admin.bookings.create.index', compact('customer', 'rooms','categories'));
     }
 
     public function store(Request $request){
@@ -42,8 +43,8 @@ class BookingController extends Controller
             'status' => 'required',
             'checkin'=> 'required',
             'checkout' => 'required',
-            'commodities' => 'nullable | array',
-            'commodities.*' => 'exists:commodities,id',"exists" 
+            'description' => 'nullable',
+             
             
             ], 
             ['customer_id.required'=>'Campo obrigatório',
@@ -53,7 +54,6 @@ class BookingController extends Controller
             'checkout'=>'Campo obrigatório',
         ]); 
 
-        $bookings->commodities = $request->commodities;
         $bookings->status = $request->status;
         $bookings->description = $request->description;
         $bookings->checkin = $request->checkin;
@@ -63,10 +63,6 @@ class BookingController extends Controller
 
         $bookings = Booking::create($validatedData);
 
-        if ($request->has('commodities')){
-            $bookings->commodities()->sync($request->input('commodities'));
-        }
-
         
         return redirect()->route('booking.index')->with('success', 'Reserva Criada com Sucesso');
         
@@ -74,22 +70,22 @@ class BookingController extends Controller
 
     public function show($id){
 
-        $commodities = Commodity::all();
+       
         $categories = Categorie::all();
         $rooms = Room::all();
         $customers = Customer::all();
         $bookings = Booking::findOrFail($id);
-        return view('admin.bookings.details.index', compact('bookings', 'rooms', 'customers', 'categories', 'commodities'));
+        return view('admin.bookings.details.index', compact('bookings', 'rooms', 'customers', 'categories'));
     }
 
     public function edit($id){
         
-        $commodities = Commodity::all();
+      
         $categories = Categorie::all();
         $rooms = Room::all();
         $customers = Customer::all();
         $bookings = Booking::findOrFail($id);
-        return view('admin.bookings.edit.index', compact('bookings', 'customers', 'rooms', 'commodities', 'categories'));
+        return view('admin.bookings.edit.index', compact('bookings', 'customers', 'rooms','categories'));
     }
 
     public function update(Request $request){

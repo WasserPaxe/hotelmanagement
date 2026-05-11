@@ -45,7 +45,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>Preço</th>
+                                                
                                                 <th>Acções </th>
                                             </tr>
                                         </thead>
@@ -54,7 +54,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>{{$categorie->name}}</td>
-                                                <td>{{$categorie->price}}</td>
+                                                
                                                 <td>
                                                     <a href="{{ route('categorie.edit', $categorie->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
                                                     <form style="display:inline" method="POST" action={{ route('categorie.delete', $categorie->id) }}"">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>

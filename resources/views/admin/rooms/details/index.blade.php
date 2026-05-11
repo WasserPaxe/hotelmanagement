@@ -44,9 +44,9 @@
                                                                 <td class="ng-binding">{{$rooms->categorie->name}}</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Condições</th>
+                                                                <th scope="row">Descrição</th>
                                                                 <td>
-                                                                  {{ $rooms->conditions }}  
+                                                                  {{ $rooms->description }}  
                                                                 </td>
                                                             </tr>
                                                              <tr>

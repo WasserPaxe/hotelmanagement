@@ -66,6 +66,7 @@
                                                 <td>{{$customer->docnumber}}</td>
                                                 <td>{{ $customer->gender }}</td>
                                                 <td>
+                                                    <a href="{{ route('booking.create', $customer->id) }}" ><button  class="btn btn-info"><i class="bi bi-door-open"></i></button></a>
                                                     <a href="{{ route('customer.show', $customer->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
                                                     <a href="{{ route('customer.edit', $customer->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
                                                     <form style="display:inline" method="POST" action="{{ route('customer.delete', $customer->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>

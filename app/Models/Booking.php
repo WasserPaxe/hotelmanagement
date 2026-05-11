@@ -18,7 +18,8 @@ class Booking extends Model
         return $this->belongsTo('App\Models\Room');
     }
 
-    public function commodities(){
-        return $this->belongsToMany('App\Models\Commodity');
+    
+    public function payments(){
+        return $this->hasMany('App\Models\Booking');
     }
 }

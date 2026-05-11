@@ -46,7 +46,7 @@
                                                 <th>Numero</th>
                                                 <th>Piso</th>
                                                 <th>Categoria</th>
-                                                <th>Condicoes</th>
+                                                <th>Descrição</th>
                                                 <th>Estado</th>
                                                 <th>Acções </th>
                                             </tr>
@@ -58,7 +58,7 @@
                                                 <td>{{$room->number}}</td>
                                                 <td>{{$room->floor}}</td>
                                                 <td>{{$room->categorie->name}}</td>
-                                                <td>{{$room->conditions}}</td>
+                                                <td>{{$room->description}}</td>
                                                 <td>{{$room->status}}</td>
                                                
                                                 <td>

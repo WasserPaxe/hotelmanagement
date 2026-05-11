@@ -71,24 +71,7 @@
                             </div>
                         </li>
 
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarCommodities" aria-expanded="true" aria-controls="sidebarCommodities" class="side-nav-link">
-                                <i class="bi bi-tags"></i>
-                                <span> Comodidades</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarCommodities">
-                                <ul class="side-nav-second-level">
-                                    
-                                   <li>
-                                        <a href="{{ route('commodity.index') }}">Listar Comodidades</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('commodity.create') }}">Adicionar Comodidades</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        
 
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarRooms" aria-expanded="false" aria-controls="sidebarRooms" class="side-nav-link">
@@ -122,8 +105,25 @@
                                    <li>
                                         <a href="{{ route('booking.index') }}">Listar Reservas</a>
                                     </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarpayments" aria-expanded="true" aria-controls="sidebarpayments" class="side-nav-link">
+                                <i class="bi bi-cash"></i>
+                                <span> Pagamentos</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarpayments">
+                                <ul class="side-nav-second-level">
+                                    
+                                   <li>
+                                        <a href="{{ route('payment.index') }}">Listar Pagamentos</a>
+                                    </li>
                                     <li>
-                                        <a href="{{ route('booking.create') }}">Adicionar Reserva</a>
+                                        <a href="{{ route('payment.create') }}">Adicionar Pagamento</a>
                                     </li>
                                 </ul>
                             </div>

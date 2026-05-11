@@ -18,14 +18,13 @@ class CategorieController extends Controller
 
           $validatedData = $this->validate($request,[
             'name' => 'required',
-            'price' => 'required',
+            
             ], 
             ['name.required'=>'Campo obrigatório',
-             'price.required'=>'Campo obrigatório',
+             
         ]);
         
         $categories->name = $request->name;
-        $categories->price = $request->price;
 
         $categories->save();
         return redirect()->route('categorie.index')->with('success', 'Categoria Adicionada com Sucesso');

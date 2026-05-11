@@ -11,16 +11,7 @@
                                                             
                                             </div>
 
-                                            <div class="col-lg-6">
-
-                                                <div class="mb-3">
-                                                    <label for="simpleinput" name="price" class="form-label">Preço</label>
-                                                    <input type="text" id="title" name="price" class="form-control @error('price') is-invalid @enderror"  value="{{ old('price', $categories->price ?? '') }}">
-                                                        @error('price')
-                                                            <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
-                                                        @enderror
-                                                </div>
-                                            </div> 
+                                             
 
                                             
                                         @if(isset($categories))

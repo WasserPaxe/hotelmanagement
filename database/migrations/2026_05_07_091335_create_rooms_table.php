@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->string('number');
             $table->string('floor')->nullable();
-            $table->json('conditions');
+            $table->string('description');
             $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
             $table->string('status');
             $table->timestamps();
