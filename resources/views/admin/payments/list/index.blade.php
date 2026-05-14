@@ -38,16 +38,19 @@
                             
                            
                                 <div class="card-header">
-                                    <h4 class="header-title">Todas Reservas</h4>
+                                    <h4 class="header-title">Todos Pagamentos</h4>
                                 </div>
                                 <div class="card-body">
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>Nome </th>
+                                                <th>Booking ID</th>
+                                                <th>Quarto</th>
                                                 <th>Valor Total</th>
                                                 <th>Data de Pagamento</th>
                                                 <th>Metodo</th>
+                                                <th>Moeda</th>
                                                 <th>Estado</th>
                                                 <th>Acções </th>
                                             </tr>
@@ -57,18 +60,21 @@
                                         <tbody>
                                             <tr>
                                                 <td>{{$payment->booking->customer->name}}</td>
-                                                
-                                                <td>{{$payment->totalPrice }}</td>
+                                                <td>{{$payment->booking->id}}</td>
+                                                <td>{{$payment->booking->room->number }}</td>
+                                                <td>{{$payment->booking->room->price }}</td>
                                              
                                               
                                                 <td>{{$payment->paymentDate }}</td>
                                                 <td>{{$payment->method}}</td>
+                                                <td>{{$payment->currency}}</td>
                                                 <td>{{$payment->status}}</td>
                                               
                                                 <td>
-                                                    <a href="{{-- {{ route('booking.show', $booking->id) }} --}}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
-                                                    <a href="{{-- {{ route('booking.edit', $booking->id) }} --}}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
-                                                    <form style="display:inline" method="POST" action="{{-- {{ route('booking.delete', $booking->id) }} --}}">{{-- @method('DELETE') --}} @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>
+                                                   
+                                                    <a href="{{ route('payment.show', $payment->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
+                                                    <a href="{{ route('payment.edit', $payment->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
+                                                    <form style="display:inline" method="POST" action="{{ route('payment.destroy', $payment->id) }}"> @method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>
                                                 </td>
                                             </tr>
                                         </tbody>

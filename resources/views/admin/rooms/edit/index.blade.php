@@ -23,9 +23,8 @@
                            
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('room.update',$rooms->id ) }}">
-                                        
-                                        @csrf
                                         @method('PUT')
+                                        @csrf
                                         @include('forms.admin._formRoom.index')
                                     </form>    
                                         </div>

@@ -7,12 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'number', 'floor', 'description', 'categorie_id', 'status',
+        'name', 'number', 'floor', 'description', 'categorie_id', 'status','price', 'bed', 'meal', 'phone'
     ];
-
-    protected $casts = [
-    'conditions' => 'array',
-];
 
     public function categorie(){
         return $this->belongsTo('App\Models\Categorie');

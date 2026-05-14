@@ -23,14 +23,15 @@ class BookingController extends Controller
 
     }
 
-    public function create(Customer $customer){
+    public function create(){
+        $customers = Customer::all();
 
         
         $categories =  Categorie::all();
       
         $rooms = Room::all();
 
-        return view('admin.bookings.create.index', compact('customer', 'rooms','categories'));
+        return view('admin.bookings.create.index', compact('rooms','categories', 'customers'));
     }
 
     public function store(Request $request){
@@ -73,8 +74,8 @@ class BookingController extends Controller
        
         $categories = Categorie::all();
         $rooms = Room::all();
-        $customers = Customer::all();
         $bookings = Booking::findOrFail($id);
+        $customers = Customer::findOrFail($bookings->customer_id);
         return view('admin.bookings.details.index', compact('bookings', 'rooms', 'customers', 'categories'));
     }
 
@@ -83,9 +84,10 @@ class BookingController extends Controller
       
         $categories = Categorie::all();
         $rooms = Room::all();
-        $customers = Customer::all();
+        
         $bookings = Booking::findOrFail($id);
-        return view('admin.bookings.edit.index', compact('bookings', 'customers', 'rooms','categories'));
+        $customer = Customer::findOrFail($bookings->customer_id);
+        return view('admin.bookings.edit.index', compact('bookings','customer', 'rooms','categories'));
     }
 
     public function update(Request $request){
@@ -100,4 +102,18 @@ class BookingController extends Controller
         return redirect()->route('booking.index')->with('delete', 'Reserva Excluída com Sucesso');
         
     }
+    
+    public function searchCustomers(Request $request)
+{
+    $term = $request->get('term');
+    
+    // Busca clientes onde o nome contenha o termo digitado
+    $customers = Customer::where('name', 'LIKE', "%{$term}%")
+                         ->select('id', 'name')
+                         ->limit(10) // Limita para não pesar
+                         ->get();
+                         
+    return response()->json($customers);
+}
+   
 }

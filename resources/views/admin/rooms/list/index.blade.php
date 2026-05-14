@@ -43,10 +43,15 @@
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
+                                                <th>Nome</th>
                                                 <th>Numero</th>
                                                 <th>Piso</th>
+                                                <th>Telefone</th>
                                                 <th>Categoria</th>
+                                                <th>Número de Camas</th>
+                                                <th>Refeição</th>
                                                 <th>Descrição</th>
+                                                <th>Preço</th>
                                                 <th>Estado</th>
                                                 <th>Acções </th>
                                             </tr>
@@ -55,10 +60,15 @@
                                        @forelse($rooms as $room)     
                                         <tbody>
                                             <tr>
+                                                <td>{{$room->name}}</td>
                                                 <td>{{$room->number}}</td>
                                                 <td>{{$room->floor}}</td>
+                                                <td>{{$room->phone}}</td>
                                                 <td>{{$room->categorie->name}}</td>
+                                                <td>{{$room->bed}}</td>
+                                                <td>{{ $room->meal }}</td>
                                                 <td>{{$room->description}}</td>
+                                                <td>{{$room->price}}</td>
                                                 <td>{{$room->status}}</td>
                                                
                                                 <td>

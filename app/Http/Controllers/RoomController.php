@@ -33,17 +33,23 @@ class RoomController extends Controller
             'categorie_id' => 'required',
             'status' => 'required',
             'description' => 'required',
+            'price' => 'required',
             ], 
             [
             'number.required'=>'Campo obrigatório',
             'categorie_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
             'description.required'=>'Campo obrigatório',
+            'price.required'=>'Campo obrigatório',
 
         ]); 
-        
+        $rooms->phone = $request->phone;
+        $rooms->bed = $request->bed;
+        $rooms->meal = $request->meal;
+        $rooms->name = $request->name;
         $rooms->number = $request->number;
         $rooms->floor = $request->floor;
+        $rooms->price = $request->price;
         $rooms->categorie_id = $request->categorie_id;
         $rooms->status = $request->status;
         $rooms->description = $request->description;
@@ -79,13 +85,15 @@ class RoomController extends Controller
             'number' => 'required',
             'categorie_id' => 'required',
             'status' => 'required',
-            'conditions' => 'required',
+            'description' => 'required',
+            'price' => 'required',
             ], 
             [
             'number.required'=>'Campo obrigatório',
             'categorie_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
-            'conditions.required'=>'Campo obrigatório',
+            'description.required'=>'Campo obrigatório',
+            'price.required'=>'Campo obrigatório',
 
         ]);
 

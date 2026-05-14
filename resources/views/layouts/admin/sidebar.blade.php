@@ -105,6 +105,10 @@
                                    <li>
                                         <a href="{{ route('booking.index') }}">Listar Reservas</a>
                                     </li>
+
+                                    <li>
+                                        <a href="{{ route('booking.create') }}">Adicionar Reserva</a>
+                                    </li>
                                     
                                 </ul>
                             </div>

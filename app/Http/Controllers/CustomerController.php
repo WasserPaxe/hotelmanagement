@@ -62,6 +62,7 @@ class CustomerController extends Controller
     }
 
     public function edit($id){
+        
         $customers = Customer::findOrFail($id);
         return view('admin.customers.edit.index', compact('customers'));
     }

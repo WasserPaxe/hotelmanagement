@@ -49,15 +49,20 @@ Route::get('/room/details/{id}', 'RoomController@show')->name('room.show');
 //Booking Route
 
 Route::get('booking/list', 'BookingController@index')->name('booking.index');
-Route::get('booking/create/{customer?}', 'BookingController@create')->name('booking.create');
+Route::get('booking/create/', 'BookingController@create')->name('booking.create');
 Route::post('booking/store', 'BookingController@store')->name('booking.store');
 Route::get('booking/edit/{id}', 'BookingController@edit')->name('booking.edit');
 Route::get('booking/details/{id}', 'BookingController@show')->name('booking.show');
 Route::put('booking/update/{id}', 'BookingController@update')->name('booking.update');
 Route::delete('booking/delete/{id}', 'BookingController@destroy')->name('booking.delete');
+Route::get('/search-customers', 'BookingController@searchCustomers')->name('bookings.search.customers');
 
 //Payment Route
 
 Route::get('/payment/list', 'PaymentController@index')->name('payment.index');
-Route::get('payment/create', 'PaymentController@create')->name('payment.create');
+Route::get('payment/create/', 'PaymentController@create')->name('payment.create');
 Route::post('payment/add', 'PaymentController@store')->name('payment.store');
+Route::get('payment/details/{id}', 'PaymentController@show')->name('payment.show');
+Route::get('payment/edit{id}', 'PaymentController@edit')->name('payment.edit');
+Route::put('payment/update/{id}', 'PaymentController@update')->name('payment.update');
+Route::delete('payment/delete/{id}', 'PaymentController@destroy')->name('payment.destroy');

@@ -1,19 +1,18 @@
 @extends('layouts.admin.main')
-@section('title', 'Detalhes Quarto')
+@section('title','Detalhes Pagamento')
 @section('content')
-
-<div class="row">
+ <div class="row">
     <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="/">Velonic</a></li>
-                                            <li class="breadcrumb-item"><a href="">Quartos</a></li>
-                                            <li class="breadcrumb-item active"><a href="{{ route('room.show', $rooms->id) }}">Detalhes Quarto</a></li>
-                                            
+                                            <li class="breadcrumb-item"><a href="">Utente</a></li>
+                                            <li class="breadcrumb-item active"><a href="{{-- {{ route('customer.show', $customers->id) }} --}}">Detalhes Pagamento</a></li>
                                         </ol>
                                     </div>
                                  
                                 </div>
+    
                         <div class="col-sm-12 mt-2">
                             <div class="card p-0">
                                 <div class="card-body p-0">
@@ -24,72 +23,72 @@
                                             <div class="tab-pane active" id="aboutme" role="tabpanel"
                                                 aria-labelledby="home-tab" tabindex="0">
                                                 <div class="profile-desk">
-                                                    <h5 class="text-uppercase fs-17 text-dark">Quarto {{ $rooms->number }}</h5>
+                                                   <h5 class=" fs-17 text-dark"></h5>
                                                     
                                                    
 
                                                     <h5 class="mt-4 fs-17 text-dark">Detalhes</h5>
                                                     <table class="table table-condensed mb-0 border-top">
                                                         <tbody>
-                                                            
                                                             <tr>
-                                                                <th scope="row">Nome</th>
+                                                               
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Nome Cliente</th>
                                                                 <td>
-                                                                    {{ $rooms->name }}
+                                                                    {{$payments->booking->customer->name}}
                                                                 </td>
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Andar</th>
+                                                                <th scope="row">Booking ID</th>
                                                                 <td>
-                                                                    {{ $rooms->floor }}
+                                                                    {{$payments->booking->id}}
                                                                 </td>
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Telefone</th>
+                                                                <th scope="row">Quarto</th>
                                                                 <td>
-                                                                    {{ $rooms->phone }}
+                                                                    {{$payments->booking->room->number}}
                                                                 </td>
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Categoria</th>
-                                                                <td class="ng-binding">{{$rooms->categorie->name}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Número de Camas</th>
+                                                                <th scope="row">Valor Total</th>
                                                                 <td>
-                                                                    {{ $rooms->bed }}
+                                                                    {{$payments->booking->room->price}}
                                                                 </td>
                                                             </tr>
 
                                                             <tr>
-                                                                <th scope="row">Refeição</th>
+                                                                <th scope="row">Data de Pagamento</th>
                                                                 <td>
-                                                                    {{ $rooms->meal }}
+                                                                    {{$payments->paymentDate}}
                                                                 </td>
                                                             </tr>
+
                                                             <tr>
-                                                                <th scope="row">Descrição</th>
+                                                                <th scope="row">Método</th>
                                                                 <td>
-                                                                  {{ $rooms->description }}  
+                                                                    {{$payments->method}}
                                                                 </td>
                                                             </tr>
-                                                            
+
                                                             <tr>
-                                                                <th scope="row">Preço</th>
+                                                                <th scope="row">Moeda</th>
                                                                 <td>
-                                                                    {{ $rooms->price }}
+                                                                    {{$payments->currency}}
                                                                 </td>
                                                             </tr>
 
                                                             <tr>
                                                                 <th scope="row">Estado</th>
                                                                 <td>
-                                                                    {{ $rooms->status }}
+                                                                    {{$payments->status}}
                                                                 </td>
                                                             </tr>
+
                                                            
 
                                                         </tbody>
@@ -101,5 +100,4 @@
                             </div>
                         </div>
                     </div>
-
 @endsection

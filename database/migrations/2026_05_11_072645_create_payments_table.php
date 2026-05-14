@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('totalPrice');
             $table->date('paymentDate');
             $table->string('status');
+            $table->string('currency');
             $table->timestamps();
         });
     }
