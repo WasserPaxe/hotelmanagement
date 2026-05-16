@@ -26,7 +26,9 @@ class PaymentController extends Controller
     }
 
     public function store(Request $request){
-           $payments = new Payment();
+           
+            $bookings = Booking::findOrFail($request->booking_id);
+            $payments = new Payment();
 
            $validatedData = $this->validate($request,[
             'booking_id' => 'required',
@@ -51,9 +53,10 @@ class PaymentController extends Controller
         $payments->method = $request->method;
         $payments->paymentDate = $request->paymentDate;
         $payments->totalPrice = $request->totalPrice;
+        
         $payments->save();
 
-        
+        $bookings->update(['status' => 'Confirmado']);
 
         return redirect()->route('payment.index')->with('success', 'Pagamento Adicionado com Sucesso');
         
@@ -100,13 +103,13 @@ class PaymentController extends Controller
         ]);  
 
         $payments = Payment::findOrFail($request->id)->update($request->all());
-        return redirect()->route('payment.index');
+        return redirect()->route('payment.index')->with('update', 'Pagamento Atualizado com Sucesso');
     }
 
     public function destroy($id){
         $payments = Payment::findOrFail($id);
         $payments->delete();
-        return redirect()->route('payment.index');
+        return redirect()->route('payment.index')->with('delete', 'Pagamento Excluído com Sucesso');
     }
     
 }

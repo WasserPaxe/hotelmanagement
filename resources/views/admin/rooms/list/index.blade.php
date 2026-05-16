@@ -43,12 +43,13 @@
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
+                                                <th>Imagem</th>
                                                 <th>Nome</th>
                                                 <th>Numero</th>
                                                 <th>Piso</th>
                                                 <th>Telefone</th>
                                                 <th>Categoria</th>
-                                                <th>Número de Camas</th>
+                                                <th>Camas</th>
                                                 <th>Refeição</th>
                                                 <th>Descrição</th>
                                                 <th>Preço</th>
@@ -60,6 +61,11 @@
                                        @forelse($rooms as $room)     
                                         <tbody>
                                             <tr>
+                                                <td>
+                                                    @if($room->image)
+                                                    <img src="{{ asset('storage/' . $room->image) }}" style="max-width: 40px; width:100%;  height: auto; object-fit:cover; " class="img-fluid" >
+                                                    @endif
+                                                </td>
                                                 <td>{{$room->name}}</td>
                                                 <td>{{$room->number}}</td>
                                                 <td>{{$room->floor}}</td>
@@ -67,15 +73,20 @@
                                                 <td>{{$room->categorie->name}}</td>
                                                 <td>{{$room->bed}}</td>
                                                 <td>{{ $room->meal }}</td>
-                                                <td>{{$room->description}}</td>
+                                                <td style="max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                                    {{$room->description}}
+                                                </td>
                                                 <td>{{$room->price}}</td>
                                                 <td>{{$room->status}}</td>
                                                
                                                 <td>
-                                                    <a href="{{ route('room.show', $room->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
-                                                    <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
-                                                    <form style="display:inline" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i> </button> </form>
+                                                    <div class="d-flex align-items-center gap-1">
+                                                        <a href="{{ route('room.show', $room->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
+                                                        <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
+                                                        <form class="m-0 p-0" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i> </button> </form>
+                                                    </div>    
                                                 </td>
+                                            
                                             </tr>
                                         </tbody>
                                         @empty

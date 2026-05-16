@@ -2,11 +2,11 @@
                                             <div class="col-lg-6">
 
                                                 <div class="mb-3">
-                                                    <label for="example-select" name="booking_id" class="form-label">Booking ID</label>
+                                                    <label for="example-select" name="booking_id" class="form-label">Reserva Nº</label>
                                                     <select class="form-select @error('booking_id') is-invalid @enderror "  name="booking_id" id="example-select">
                                                          <option value="">--Select--</option>
                                                         @foreach ($bookings as $item)
-                                                        <option value="{{ $item->id }}" {{ old('booking_id', $payments->booking_id) == $item->id ? 'selected' : '' }}>{{ $item->id }} NBK</option>
+                                                        <option value="{{ $item->id }}" {{-- {{ ('booking_id', $payments->booking_id) == $item->id ? 'selected' : '' }} --}}>{{ $item->id }} NBK</option>
                                                         @endforeach
                                                     </select>
                                                     @error('booking_id')
@@ -53,7 +53,7 @@
                                                     <select class="form-select @error('totalPrice') is-invalid @enderror "  name="totalPrice" id="example-select">
                                                          <option value="">--Select--</option>
                                                         @foreach ($bookings as $item)
-                                                        <option value="{{ $item->id }}" {{ old('totalPrice', $payments->totalPrice) == $item->id ? 'selected' : '' }}>{{ $item->room->price }}</option>
+                                                        <option value="{{ $item->id }}"{{--  {{ old('totalPrice', $payments->totalPrice) == $item->id ? 'selected' : '' }} --}}>{{ $item->room->price }}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('totalPrice')

@@ -57,11 +57,12 @@ Route::put('booking/update/{id}', 'BookingController@update')->name('booking.upd
 Route::delete('booking/delete/{id}', 'BookingController@destroy')->name('booking.delete');
 Route::get('/search-customers', 'BookingController@searchCustomers')->name('bookings.search.customers');
 
+
 //Payment Route
 
 Route::get('/payment/list', 'PaymentController@index')->name('payment.index');
 Route::get('payment/create/', 'PaymentController@create')->name('payment.create');
-Route::post('payment/add', 'PaymentController@store')->name('payment.store');
+Route::post('payment/add/', 'PaymentController@store')->name('payment.store');
 Route::get('payment/details/{id}', 'PaymentController@show')->name('payment.show');
 Route::get('payment/edit{id}', 'PaymentController@edit')->name('payment.edit');
 Route::put('payment/update/{id}', 'PaymentController@update')->name('payment.update');

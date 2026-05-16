@@ -19,7 +19,7 @@
                         <div class="col-12">
                             
                             <div class="card mt-2">
-                             {{--    @if(session('success'))
+                               @if(session('success'))
                                  <div class="alert alert-info alert-dismissible fade show" role="alert">
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         <span >{{session('success')}}</span>
@@ -34,7 +34,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         <span >{{session('delete')}}</span>
                                 </div>
-                                @endif --}}
+                                @endif 
                             
                            
                                 <div class="card-header">

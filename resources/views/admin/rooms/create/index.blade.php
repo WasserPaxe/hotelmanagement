@@ -22,7 +22,7 @@
                                 </div>
                            
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('room.store') }}">
+                                    <form method="POST" action="{{ route('room.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         @include('forms.admin._formRoom.index')
                                     </form>    

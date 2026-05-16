@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'name', 'number', 'floor', 'description', 'categorie_id', 'status','price', 'bed', 'meal', 'phone'
+        'image','name', 'number', 'floor', 'description', 'categorie_id', 'status','price', 'bed', 'meal', 'phone'
     ];
 
     public function categorie(){

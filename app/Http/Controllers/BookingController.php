@@ -65,7 +65,7 @@ class BookingController extends Controller
         $bookings = Booking::create($validatedData);
 
         
-        return redirect()->route('booking.index')->with('success', 'Reserva Criada com Sucesso');
+        return redirect()->route('payment.create', ['booking_id'=>$bookings->id]);
         
     }
 

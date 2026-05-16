@@ -1,5 +1,13 @@
 <div class="row">
                                             <div class="col-lg-6">
+
+                                                <div class="mb-3">
+                                                    <label for="simpleinput" name="image" class="form-label">Insira a foto do Quarto</label>
+                                                    <input type="file" id="title" name="image" class="form-control  @error('image') is-invalid @enderror"  value="{{ old('number', $rooms->number ?? '') }}" accept="image/*">
+                                                        @error('image')
+                                                            <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
+                                                        @enderror 
+                                                </div>
                                                 
                                                 <div class="mb-3">
                                                     <label for="simpleinput" name="number" class="form-label">Número do Quarto</label>
@@ -93,11 +101,9 @@
                                                 
                                                <div class="mb-3">
                                                     <label for="example-textarea" name="description" class="form-label">Descricao</label>
-                                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description', $rooms->description ?? '') }}" id="example-textarea"></textarea>
+                                                    <textarea class="form-control" name="description" value="{{ old('description', $rooms->description ?? '') }}" id="example-textarea"></textarea>
                                                
-                                                    @error('description')
-                                                        <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
-                                                    @enderror 
+                                                   
 
                                                 </div>
                                                 

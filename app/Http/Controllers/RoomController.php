@@ -29,20 +29,21 @@ class RoomController extends Controller
         $rooms = new Room();
 
            $validatedData = $this->validate($request,[
-            'number' => 'required',
+           'image' => 'nullable', 
+           'number' => 'required',
             'categorie_id' => 'required',
             'status' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'price' => 'required',
             ], 
             [
             'number.required'=>'Campo obrigatório',
             'categorie_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
-            'description.required'=>'Campo obrigatório',
             'price.required'=>'Campo obrigatório',
 
         ]); 
+        
         $rooms->phone = $request->phone;
         $rooms->bed = $request->bed;
         $rooms->meal = $request->meal;
@@ -54,6 +55,10 @@ class RoomController extends Controller
         $rooms->status = $request->status;
         $rooms->description = $request->description;
 
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('rooms', 'public');
+            $rooms->image = $path;
+        }
 
         $rooms->save();
         return redirect()->route('room.index')->with('success', 'Quarto Adicionado com Sucesso');
