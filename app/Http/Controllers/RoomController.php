@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Categorie;
@@ -86,23 +86,40 @@ class RoomController extends Controller
 
        public function update(Request $request){
 
+        $rooms = Room::findOrFail($request->id);
+
         $validatedData = $this->validate($request,[
+            'image' => 'nullable', 
             'number' => 'required',
             'categorie_id' => 'required',
             'status' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'price' => 'required',
             ], 
             [
             'number.required'=>'Campo obrigatório',
             'categorie_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
-            'description.required'=>'Campo obrigatório',
             'price.required'=>'Campo obrigatório',
 
         ]);
 
-        $rooms = Room::findOrFail($request->id)->update($request->all());
+        $rooms->update($request->except('image'));
+
+        if($request->hasFile('image')){
+         
+         
+          if($rooms->image && Storage::disk('public')->exists($rooms->image)){
+            Storage::disk('public')->delete($rooms->image);
+          }
+          $path = $request->file('image')->store('rooms', 'public');
+          $rooms->image = $path;
+          $rooms->save();
+        }
+
+        
+        
+        
         return redirect()->route('room.index')->with('update', 'Quarto Atualizado com Sucesso');
     }
 }

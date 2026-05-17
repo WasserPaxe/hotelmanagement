@@ -2,7 +2,7 @@
                                             <div class="col-lg-6">
 
                                                 <div class="mb-3">
-                                                    <label for="example-select" name="booking_id" class="form-label">Reserva Nº</label>
+                                                    <label for="example-select" name="booking_id" class="form-label">Booking ID</label>
                                                     <select class="form-select @error('booking_id') is-invalid @enderror "  name="booking_id" id="example-select">
                                                          <option value="">--Select--</option>
                                                         @foreach ($bookings as $item)

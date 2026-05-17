@@ -12,8 +12,9 @@ use App\Models\Payment;
 class PaymentController extends Controller
 {
     public function index(){
+        
         $payments = Payment::all();
-        $bookings = Booking::all();
+        $bookings = Booking::latest()->take(2)->get();
         return view('admin.payments.list.index', compact('payments', 'bookings'));
     }
 

@@ -63,7 +63,7 @@
                                             <tr>
                                                 <td>
                                                     @if($room->image)
-                                                    <img src="{{ asset('storage/' . $room->image) }}" style="max-width: 40px; width:100%;  height: auto; object-fit:cover; " class="img-fluid" >
+                                                    <img src="{{ asset('storage/' . $room->image)}}" style="max-width: 40px; width:100%;  height: auto; object-fit:cover; " class="img-fluid" >
                                                     @endif
                                                 </td>
                                                 <td>{{$room->name}}</td>

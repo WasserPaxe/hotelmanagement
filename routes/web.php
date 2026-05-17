@@ -67,3 +67,15 @@ Route::get('payment/details/{id}', 'PaymentController@show')->name('payment.show
 Route::get('payment/edit{id}', 'PaymentController@edit')->name('payment.edit');
 Route::put('payment/update/{id}', 'PaymentController@update')->name('payment.update');
 Route::delete('payment/delete/{id}', 'PaymentController@destroy')->name('payment.destroy');
+
+//Employee Route
+
+Route::get('/employees/list', 'EmployeeController@index')->name('employees.index');
+Route::get('/employees/create/', 'EmployeeController@create')->name('employees.create');
+Route::post('/employees/add/', 'EmployeeController@store')->name('employees.store');
+Route::get('/employees/details/{id}', 'EmployeeController@show')->name('employees.show');
+Route::get('/employees/edit{id}', 'EmployeeController@edit')->name('employees.edit');
+Route::put('/employees/update/{id}', 'EmployeeController@update')->name('employees.update');
+Route::delete('/employees/delete/{id}', 'EmployeeController@destroy')->name('employees.destroy');
+
+

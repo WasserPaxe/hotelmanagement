@@ -126,8 +126,27 @@
                                    <li>
                                         <a href="{{ route('payment.index') }}">Listar Pagamentos</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{ route('payment.create') }}">Adicionar Pagamento</a>
+                                    </li> --}}
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebaremployees" aria-expanded="true" aria-controls="sidebaremployees" class="side-nav-link">
+                                <i class="bi bi-person-badge"></i>
+                                <span> Funcionários</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebaremployees">
+                                <ul class="side-nav-second-level">
+                                    
+                                   <li>
+                                        <a href="{{ route('employees.index') }}">Listar Funcionários</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('employees.create') }}">Adicionar Funconário</a>
                                     </li>
                                 </ul>
                             </div>
