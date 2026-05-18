@@ -2,20 +2,16 @@
                                             <div class="col-lg-6">
 
                                                 <div class="mb-3">
-                                                    <label for="example-select" name="booking_id" class="form-label">Booking ID</label>
-                                                    <select class="form-select @error('booking_id') is-invalid @enderror "  name="booking_id" id="example-select">
-                                                         <option value="">--Select--</option>
-                                                        @foreach ($bookings as $item)
-                                                        <option value="{{ $item->id }}" {{-- {{ ('booking_id', $payments->booking_id) == $item->id ? 'selected' : '' }} --}}>{{ $item->id }} NBK</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('booking_id')
-                                                        <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
-                                                    @enderror
+                                                    <label for="example-select" name="booking_id" class="form-label">Reserva Nº</label>
+                                                    <input type="number" class="form-control" name='booking_id' value="{{ session('booking_id') }}" readonly>
+                                                    
                                                 </div>
 
-
-                                            
+                                                {{-- <div class="mb-3">
+                                                    <label for="example-select" name="totalPrice" class="form-label">Preço Total</label>
+                                                   <input type="number" class="form-control" name='' value= $totalPrice >
+                                                </div>
+                                             --}}
                                                <div class="mb-3">
                                                     <label for="example-select" name="method" class="form-label">Metodo de Pagamento</label>
                                                     <select class="form-select @error('method') is-invalid @enderror"  name="method" id="example-select">
@@ -49,16 +45,8 @@
                                             <div class="col-lg-6">
 
                                                <div class="mb-3">
-                                                    <label for="example-select" name="totalPrice" class="form-label">Valor Total</label>
-                                                    <select class="form-select @error('totalPrice') is-invalid @enderror "  name="totalPrice" id="example-select">
-                                                         <option value="">--Select--</option>
-                                                        @foreach ($bookings as $item)
-                                                        <option value="{{ $item->id }}"{{--  {{ old('totalPrice', $payments->totalPrice) == $item->id ? 'selected' : '' }} --}}>{{ $item->room->price }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('totalPrice')
-                                                        <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
-                                                    @enderror
+                                                    <label for="example-select" name="totalPrice" class="form-label">Valor do Quarto</label>
+                                                   <input type="number" class="form-control" name='totalPrice' value="{{ session('room_id') }}">
                                                 </div>
 
                                                 <div class="mb-3">

@@ -78,4 +78,14 @@ Route::get('/employees/edit{id}', 'EmployeeController@edit')->name('employees.ed
 Route::put('/employees/update/{id}', 'EmployeeController@update')->name('employees.update');
 Route::delete('/employees/delete/{id}', 'EmployeeController@destroy')->name('employees.destroy');
 
+//Typespace Route
+
+Route::get('/typespace/list', 'TypespaceController@index')->name('typespace.index');
+Route::get('/typespace/create/', 'TypespaceController@create')->name('typespace.create');
+Route::post('/typespace/add', 'TypespaceController@store')->name('typespace.store');
+Route::get('/typespace/edit/{id}', 'TypespaceController@edit')->name('typespace.edit');
+Route::put('/typespace/update/{id}', 'TypespaceController@update')->name('typespace.update');
+Route::delete('/typespace/delete/{id}', 'TypespaceController@destroy')->name('typespace.destroy');
+
+
 

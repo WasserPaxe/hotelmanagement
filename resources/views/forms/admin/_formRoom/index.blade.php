@@ -1,13 +1,6 @@
 <div class="row">
                                             <div class="col-lg-6">
 
-                                                <div class="mb-3">
-                                                    <label for="simpleinput" name="image" class="form-label">Insira a foto do Quarto</label>
-                                                    <input type="file" id="title" name="image" class="form-control  @error('image') is-invalid @enderror"  value="{{ old('image', $rooms->image ?? '') }}" accept="image/*">
-                                                        @error('image')
-                                                            <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
-                                                        @enderror 
-                                                </div>
                                                 
                                                 <div class="mb-3">
                                                     <label for="simpleinput" name="number" class="form-label">Número do Quarto</label>

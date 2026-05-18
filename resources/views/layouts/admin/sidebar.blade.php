@@ -134,6 +134,25 @@
                         </li>
 
                         <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebartypespaces" aria-expanded="true" aria-controls="sidebartypespaces" class="side-nav-link">
+                                <i class="bi bi-house-fill"></i>
+                                <span> Tipos de Sala</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebartypespaces">
+                                <ul class="side-nav-second-level">
+                                    
+                                   <li>
+                                        <a href="{{ route('typespace.index') }}">Listar Tipos de Sala</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('typespace.create') }}">Adicionar Tipos de Sala</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebaremployees" aria-expanded="true" aria-controls="sidebaremployees" class="side-nav-link">
                                 <i class="bi bi-person-badge"></i>
                                 <span> Funcionários</span>

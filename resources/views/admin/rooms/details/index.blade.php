@@ -15,11 +15,7 @@
                                  
                                 </div>
                         <div class="col-sm-12 mt-2">
-                            <div class="profile-bg-picture"
-                                style="background-image:url({{ asset('storage/' . $rooms->image) }}); margin:auto;">
-                                <span class="picture-bg-overlay"></span>
-                                <!-- overlay -->
-                            </div>
+                        
                             <div class="card p-0">
                                 <div class="card-body p-0">
                                     <div class="profile-content">

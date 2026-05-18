@@ -29,7 +29,6 @@ class RoomController extends Controller
         $rooms = new Room();
 
            $validatedData = $this->validate($request,[
-           'image' => 'nullable', 
            'number' => 'required',
             'categorie_id' => 'required',
             'status' => 'required',
@@ -55,11 +54,7 @@ class RoomController extends Controller
         $rooms->status = $request->status;
         $rooms->description = $request->description;
 
-        if($request->hasFile('image')){
-            $path = $request->file('image')->store('rooms', 'public');
-            $rooms->image = $path;
-        }
-
+        
         $rooms->save();
         return redirect()->route('room.index')->with('success', 'Quarto Adicionado com Sucesso');
     }
@@ -89,7 +84,6 @@ class RoomController extends Controller
         $rooms = Room::findOrFail($request->id);
 
         $validatedData = $this->validate($request,[
-            'image' => 'nullable', 
             'number' => 'required',
             'categorie_id' => 'required',
             'status' => 'required',
@@ -104,22 +98,8 @@ class RoomController extends Controller
 
         ]);
 
-        $rooms->update($request->except('image'));
+        $rooms->update($request->all());
 
-        if($request->hasFile('image')){
-         
-         
-          if($rooms->image && Storage::disk('public')->exists($rooms->image)){
-            Storage::disk('public')->delete($rooms->image);
-          }
-          $path = $request->file('image')->store('rooms', 'public');
-          $rooms->image = $path;
-          $rooms->save();
-        }
-
-        
-        
-        
         return redirect()->route('room.index')->with('update', 'Quarto Atualizado com Sucesso');
     }
 }

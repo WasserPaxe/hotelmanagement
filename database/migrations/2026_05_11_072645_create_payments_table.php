@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
             $table->string('method');
-            $table->decimal('totalPrice');
+            $table->decimal('totalPrice',15,2);
             $table->date('paymentDate');
             $table->string('status');
             $table->string('currency');

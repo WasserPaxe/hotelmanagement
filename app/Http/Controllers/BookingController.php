@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Room;
 use App\Models\Categorie;
 use App\Models\Booking;
+use App\Models\Payment;
 
 
 
@@ -24,11 +26,9 @@ class BookingController extends Controller
     }
 
     public function create(){
-        $customers = Customer::all();
 
-        
+        $customers = Customer::all();
         $categories =  Categorie::all();
-      
         $rooms = Room::all();
 
         return view('admin.bookings.create.index', compact('rooms','categories', 'customers'));
@@ -44,9 +44,7 @@ class BookingController extends Controller
             'status' => 'required',
             'checkin'=> 'required',
             'checkout' => 'required',
-            'description' => 'nullable',
-             
-            
+            'description' => 'nullable',            
             ], 
             ['customer_id.required'=>'Campo obrigatório',
             'room_id.required'=>'Campo obrigatório',
@@ -62,10 +60,10 @@ class BookingController extends Controller
         $bookings->customer_id = $request->customer_id;
         $bookings->room_id = $request->room_id;
 
-        $bookings = Booking::create($validatedData);
-
         
-        return redirect()->route('payment.create', ['booking_id'=>$bookings->id]);
+
+        $bookings = Booking::create($validatedData);
+        return redirect()->back()->with(['booking_created' => true, 'booking_id'=>$bookings->id, 'room_id'=>$bookings->room->price,]);
         
     }
 

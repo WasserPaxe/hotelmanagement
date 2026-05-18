@@ -45,7 +45,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome </th>
-                                                <th>Booking ID</th>
+                                                <th>Número da Reserva</th>
                                                 <th>Quarto</th>
                                                 <th>Valor Total</th>
                                                 <th>Data de Pagamento</th>
@@ -62,7 +62,7 @@
                                                 <td>{{$payment->booking->customer->name}}</td>
                                                 <td>{{$payment->booking->id}}</td>
                                                 <td>{{$payment->booking->room->number }}</td>
-                                                <td>{{$payment->booking->room->price }}</td>
+                                                <td>{{$payment->totalPrice }}</td>
                                              
                                               
                                                 <td>{{$payment->paymentDate }}</td>

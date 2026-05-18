@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Room;
@@ -28,7 +29,7 @@ class PaymentController extends Controller
 
     public function store(Request $request){
            
-            $bookings = Booking::findOrFail($request->booking_id);
+            $bookings = Booking::with('room')->findOrFail($request->booking_id);
             $payments = new Payment();
 
            $validatedData = $this->validate($request,[
@@ -38,28 +39,36 @@ class PaymentController extends Controller
             'paymentDate'=> 'required',
             'method' => 'required', 
             'currency' => 'required',
-            
             ], 
             ['booking_id.required'=>'Campo obrigatório',
             'totalPrice.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
             'paymentDate.required'=>'Campo obrigatório',
-            'method'=>'Campo obrigatório',
+            'method'=>'Campo obrigatório', 
             'currency'=>'Campo obrigatório',
-        ]);  
+        ]); 
+        
+        $checkin = Carbon::parse($bookings->checkin);
+        $checkout = Carbon::parse($bookings->checkout);
+        $days = $checkin->diffInDays($checkout);
+        $dailyPrice = $bookings->room->price ?? 0;
+        $totalPrice = $dailyPrice * $days;
+
+
 
         $payments->booking_id = $request->booking_id;
         $payments->status = $request->status;
         $payments->currency = $request->currency;
         $payments->method = $request->method;
         $payments->paymentDate = $request->paymentDate;
-        $payments->totalPrice = $request->totalPrice;
-        
+        $payments->totalPrice = $totalPrice;
+
         $payments->save();
 
+        //Corrigir
         $bookings->update(['status' => 'Confirmado']);
-
-        return redirect()->route('payment.index')->with('success', 'Pagamento Adicionado com Sucesso');
+    
+        return redirect()->route('payment.index')->with('success', 'Reserva e Pagamento adicionado com Sucesso');
         
     }
 

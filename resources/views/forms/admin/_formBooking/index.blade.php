@@ -35,7 +35,7 @@
                                                     <label for="example-select" name="status" class="form-label">Estado</label>
                                                     <select class="form-select @error('status') is-invalid @enderror"  name="status" id="example-select">
                                                         <option value="">Selecione</option>
-                                                        <option value="Confirmado" {{ (old('status', $bookings->status ?? '') == 'Confirmado') ? 'selected' : '' }}>Confirmado</option>
+                                                        
                                                         <option value="Pendente" {{ (old('status', $bookings->status ?? '') == 'Pendente') ? 'selected' : '' }}>Pendente</option>
                                                        
                                                     </select>
@@ -73,12 +73,7 @@
                                                 
                                                 
                                             </div>
-                                            <div class="col-lg-12">
-                                                <div class="mb-3">
-                                                    <label for="example-textarea" name="description" class="form-label">Descricao</label>
-                                                    <textarea class="form-control" name="description" id="example-textarea" rows="5" >{{ old('description', $bookings->description ?? '') }}</textarea>
-                                                </div>
-                                            <div>
+                                          
                                                 
 
 
@@ -91,3 +86,4 @@
                                                 <button  class="btn btn-primary m-2">Adicionar</button>
                                             </div>
                                         @endif
+                                      

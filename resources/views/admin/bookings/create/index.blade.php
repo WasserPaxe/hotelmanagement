@@ -26,9 +26,33 @@
                                         @include('forms.admin._formBooking.index')
                                     </form>    
                                         </div>
-                                </div> <!-- end card-body -->
+                                </div>
+                                 <!-- end card-body -->
                             </div> <!-- end card -->
-                        </div><!-- end col -->
+                        </div>
+                        
+                        @if(session('booking_created'))
+                        <div class="col-12 mt-2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="header-title">Pagamento</h4>
+                                    
+                                </div>
+                           
+                                <div class="card-body">
+                                    
+                                    <form method="POST" action=" {{ route('payment.store') }}">
+                                        @csrf
+                                        @include('forms.admin._formPayment.index')
+                                    </form>  
+                                    
+                                        </div>
+                                </div>
+                                 <!-- end card-body -->
+                            </div> <!-- end card -->
+                        </div>
+                        @endif  
+                        <!-- end col -->
                     </div>
 
 @endsection
