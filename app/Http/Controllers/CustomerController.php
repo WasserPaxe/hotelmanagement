@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Customer;
 
 class CustomerController extends Controller
@@ -11,7 +12,7 @@ class CustomerController extends Controller
 
     public function index(){
         
-        $customers = Customer::all();
+        $customers = Customer::latest()->paginate();
         return view('admin.customers.list.index', compact('customers'));
     }
 
@@ -55,11 +56,7 @@ class CustomerController extends Controller
         return view('admin.customers.details.index', compact('customers'));
     }
 
-    public function destroy($id){
-        $customers = Customer::findOrFail($id);
-        $customers->delete();
-        return redirect()->route('customer.index')->with('delete', 'Cliente Excluído Com Sucesso');
-    }
+    
 
     public function edit($id){
         
@@ -85,6 +82,31 @@ class CustomerController extends Controller
         $customers = Customer::findOrFail($request->id)->update($request->all());
         return redirect()->route('customer.index')->with('update', 'Cliente Atualizado Com Sucesso');
 
+    }
+
+    public function destroy($id){
+        $customers = Customer::findOrFail($id);
+        $customers->delete();
+        return redirect()->route('customer.index')->with('delete', 'Cliente Excluído Com Sucesso');
+    }
+
+    public function search(Request $request){
+        $customers = Customer::where('name', 'LIKE', "%{$request->search}%")
+                                ->orWhere('docnumber', 'LIKE', "%{$request->search}%")
+                                ->paginate();
+        return view('admin.customers.list.index', compact('customers'));
+    }
+
+    public function createDetailPdf($id){
+        $customers = Customer::findOrFail($id);
+        $pdf = PDF::loadview('pdfs.customers.details.index', compact('customers'));
+        return $pdf->download('customer.pdf');
+    }
+
+    public function createListPdf(){
+        $customers = Customer::all();
+        $pdf = PDF::loadview('pdfs.customers.list.index', compact('customers'));
+        return $pdf->download('AllCustomer.pdf');
     }
     
 }

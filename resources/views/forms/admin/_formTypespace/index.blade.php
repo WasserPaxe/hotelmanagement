@@ -3,7 +3,7 @@
                                                 
                                                 <div class="mb-3">
                                                     <label for="simpleinput" name="name" class="form-label">Nome</label>
-                                                    <input type="text" id="title" name="name" class="form-control @error('name') is-invalid @enderror"  value="{{ old('name', $typespaces->name ?? '') }}">
+                                                    <input type="text" placeholder="Ex.: Sala de Reunião, Auditório..." id="title" name="name" class="form-control @error('name') is-invalid @enderror"  value="{{ old('name', $typespaces->name ?? '') }}">
                                                         @error('name')
                                                             <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
                                                         @enderror

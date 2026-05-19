@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="row">
+
     
                         
                                  <div class="page-title-box">
@@ -43,6 +44,23 @@
                                     <h4 class="header-title">Todos Utentes</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                        <div class="dt-buttons btn-group flex-wrap"> 
+                                                
+                                                <a href="{{ route('customerList.pdf') }}"><button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="datatable-buttons" type="button"><i class="bi bi-file-pdf-fill"></i></button> </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 text-md-end"><div id="datatable-buttons_filter" class="dataTables_filter">
+                                            <form action="{{ route('customer.search') }}" method="POST">
+                                                @csrf
+                                                <label>
+                                                    <input type="search" name="search" class="form-control form-control-sm" placeholder="Filtro..." aria-controls="datatable-buttons">
+                                                </label>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
@@ -68,6 +86,7 @@
                                                 <td>
                                                     
                                                     <a href="{{ route('customer.show', $customer->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
+                                                    <a href="{{ route('customerDetail.pdf', $customer->id) }}" ><button  class="btn btn-pink"><i class="bi bi-file-pdf-fill"></i></button></a>
                                                     <a href="{{ route('customer.edit', $customer->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
                                                     <form style="display:inline" method="POST" action="{{ route('customer.delete', $customer->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i></button> </form>
                                                 </td>
@@ -75,11 +94,19 @@
                                         </tbody>
                                         @empty
                                         @endforelse
+                                        {{ $customers->links() }}
                                     </table>
 
                                 </div> <!-- end card body-->
                             </div> <!-- end card -->
-                        </div><!-- end col-->
+                        </div>
+                        
+                        <!-- end col-->
+                        
                     </div> 
+                    
+                    
 
 @endsection
+
+

@@ -26,7 +26,9 @@ Route::delete('/customer/delete/{id}', 'CustomerController@destroy')->name('cust
 Route::get('/customer/edit/{id}', 'CustomerController@edit')->name('customer.edit');
 Route::put('/customer/update/{id}', 'CustomerController@update')->name('customer.update');
 Route::get('/customer/details/{id}', 'CustomerController@show')->name('customer.show');
-
+Route::post('/customer/search', 'CustomerController@search')->name('customer.search');
+Route::get('/customer/details/pdf/{id}', 'CustomerController@createDetailPdf')->name('customerDetail.pdf');
+Route::get('/customer/list/pdf/', 'CustomerController@createListPdf')->name('customerList.pdf');
 //Categories Route
 
 Route::get('/room/categories', 'CategorieController@create')->name('categorie.create');
@@ -86,6 +88,10 @@ Route::post('/typespace/add', 'TypespaceController@store')->name('typespace.stor
 Route::get('/typespace/edit/{id}', 'TypespaceController@edit')->name('typespace.edit');
 Route::put('/typespace/update/{id}', 'TypespaceController@update')->name('typespace.update');
 Route::delete('/typespace/delete/{id}', 'TypespaceController@destroy')->name('typespace.destroy');
+
+//Space Route
+
+Route::get('/space/list', 'SpaceController@index')->name('space.index');
 
 
 

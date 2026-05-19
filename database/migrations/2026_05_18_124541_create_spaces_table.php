@@ -18,6 +18,7 @@ class CreateSpacesTable extends Migration
             $table->string('name');
             $table->integer('capacity');
             $table->string('conditions');
+            $table->string('equipment');
             $table->decimal('price');
             $table->foreignId('typespace_id')->constrained('typespaces')->onDelete('cascade');
             $table->timestamps();
