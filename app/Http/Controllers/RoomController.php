@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Categorie;
@@ -71,15 +73,7 @@ class RoomController extends Controller
         return view('admin.rooms.edit.index', compact('rooms', 'categories'));
     }
 
-    public function destroy($id){
-        
-        $rooms = Room::findOrFail($id);
-        $rooms->delete();
-        return redirect()->route('room.index')->with('delete', 'Quarto Removido com Sucesso');
-
-    }
-
-       public function update(Request $request){
+    public function update(Request $request){
 
         $rooms = Room::findOrFail($request->id);
 
@@ -102,4 +96,47 @@ class RoomController extends Controller
 
         return redirect()->route('room.index')->with('update', 'Quarto Atualizado com Sucesso');
     }
+
+    public function destroy($id){
+        
+        $rooms = Room::findOrFail($id);
+        $rooms->delete();
+        return redirect()->route('room.index')->with('delete', 'Quarto Removido com Sucesso');
+
+    }
+
+    public function search(Request $request){
+        $rooms = Room::where('name', 'LIKE', "%{$request->search}%")
+                                ->orWhere('price', 'LIKE', "%{$request->search}%")
+                                ->orWhere('number', 'LIKE', "%{$request->search}%")
+                                ->orWhere('name', 'LIKE', "%{$request->search}%")
+                                ->orWhere('status', 'LIKE', "%{$request->search}%")
+                                ->orWhere('floor', 'LIKE', "%{$request->search}")
+                                ->orWhere('phone', 'LIKE', "%{$request->search}%")
+                                ->orWhereHAs('categorie', function($query) use ($request){
+                                    $query->where('name', 'LIKE', "%{$request->search}%");
+                                })
+                                ->get();
+        return view('admin.rooms.list.index', compact('rooms'));
+    }
+
+    public function createDetailPdf($id){
+        $rooms = Room::findOrFail($id);
+        $pdf = PDF::loadview('pdfs.rooms.details.index', compact('rooms'));
+        return $pdf->download('room.pdf');
+    }
+
+    public function createListPdf(){
+        $rooms = Room::all();
+        $totalRooms = Room::count();
+        $totalCategories = Room::where('categorie_id')->count();
+   
+        // Conta quantas categorias DIFERENTES existem nesses quartos
+         // O 'pluck' pega só os IDs das categorias, 'unique' elimina repetidos, 'count' conta
+         $totalCategories = $rooms->pluck('categorie_id')->unique()->count();
+        $pdf = PDF::loadview('pdfs.rooms.list.index', compact('rooms', 'totalRooms', 'totalCategories'));
+        return $pdf->download('AllRooms.pdf');
+    }
+
+       
 }

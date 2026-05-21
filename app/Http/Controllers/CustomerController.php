@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Customer;
 
@@ -12,7 +13,7 @@ class CustomerController extends Controller
 
     public function index(){
         
-        $customers = Customer::latest()->paginate();
+        $customers = Customer::latest()->get();
         return view('admin.customers.list.index', compact('customers'));
     }
 
@@ -93,7 +94,11 @@ class CustomerController extends Controller
     public function search(Request $request){
         $customers = Customer::where('name', 'LIKE', "%{$request->search}%")
                                 ->orWhere('docnumber', 'LIKE', "%{$request->search}%")
-                                ->paginate();
+                                ->orWhere('phone', 'LIKE', "%{$request->search}%")
+                                ->orWhere('gender', 'LIKE', "%{$request->search}%")
+                                ->orWhere('email', 'LIKE', "%{$request->search}%")
+                                ->orWhere('nationality', 'LIKE', "%{$request->search}%")
+                                ->get();
         return view('admin.customers.list.index', compact('customers'));
     }
 
@@ -105,7 +110,12 @@ class CustomerController extends Controller
 
     public function createListPdf(){
         $customers = Customer::all();
-        $pdf = PDF::loadview('pdfs.customers.list.index', compact('customers'));
+        $totalMens = Customer::where('gender', 'Masculino')->count();
+        $totalWomens = Customer::where('gender', 'Feminino')->count();
+        $totalCustomers = Customer::count();
+        $nationalityCustomers = Customer::select('nationality', DB::raw('count(*)as total'))->groupBy('nationality')->orderByDesc('total')->first();
+        $genderCustomers = Customer::select('gender', DB::raw('count(*)as total'))->groupBy('gender')->orderByDesc('total')->first();
+        $pdf = PDF::loadview('pdfs.customers.list.index', compact('customers', 'totalCustomers', 'nationalityCustomers', 'genderCustomers', 'totalMens', 'totalWomens'));
         return $pdf->download('AllCustomer.pdf');
     }
     

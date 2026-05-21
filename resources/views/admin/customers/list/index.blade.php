@@ -94,7 +94,7 @@
                                         </tbody>
                                         @empty
                                         @endforelse
-                                        {{ $customers->links() }}
+                                        
                                     </table>
 
                                 </div> <!-- end card body-->

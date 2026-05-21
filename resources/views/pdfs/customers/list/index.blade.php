@@ -78,6 +78,12 @@
             @endforeach
         </tbody>
     </table>
-
+    <div style="">
+        <p><strong>Obs.:</strong>  O Hotel conta com um total de {{ $totalCustomers }} Utentes,dos quais {{ $totalMens }} Homens e {{ $totalWomens }} mulheres, 
+            portanto sao maioritariamente do sexo {{ $genderCustomers->gender }}  dos quais a nacionalidade com maior predominância é a {{ $nationalityCustomers->nationality }}.
+        </p>
+    </div>
+    
+    
 </body>
 </html>

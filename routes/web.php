@@ -29,6 +29,8 @@ Route::get('/customer/details/{id}', 'CustomerController@show')->name('customer.
 Route::post('/customer/search', 'CustomerController@search')->name('customer.search');
 Route::get('/customer/details/pdf/{id}', 'CustomerController@createDetailPdf')->name('customerDetail.pdf');
 Route::get('/customer/list/pdf/', 'CustomerController@createListPdf')->name('customerList.pdf');
+
+
 //Categories Route
 
 Route::get('/room/categories', 'CategorieController@create')->name('categorie.create');
@@ -40,13 +42,16 @@ Route::delete('/room/categories/delete/{id}', 'CategorieController@destroy')->na
 
 //Room Route
 
-Route::get('/room/create', 'RoomController@create')->name('room.create');
-Route::post('/room/add', 'RoomController@store')->name('room.store');
 Route::get('/room/list', 'RoomController@index')->name('room.index');
-Route::delete('/room/delete/{id}', 'RoomController@destroy')->name('room.delete');
+Route::get('/room/create', 'RoomController@create')->name('room.create');
+Route::get('/room/details/{id}', 'RoomController@show')->name('room.show');
+Route::post('/room/add', 'RoomController@store')->name('room.store');
 Route::get('/room/edit/{id}', 'RoomController@edit')->name('room.edit');
 Route::put('/room/update/{id}', 'RoomController@update')->name('room.update');
-Route::get('/room/details/{id}', 'RoomController@show')->name('room.show');
+Route::delete('/room/delete/{id}', 'RoomController@destroy')->name('room.delete');
+Route::post('/rooms/search', 'RoomController@search')->name('room.search');
+Route::get('/rooms/details/pdf/{id}', 'RoomController@createDetailPdf')->name('roomDetail.pdf');
+Route::get('/rooms/list/pdf/', 'RoomController@createListPdf')->name('roomList.pdf');
 
 //Booking Route
 
