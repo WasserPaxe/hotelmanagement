@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50b8710df81fed86d42f9e1615d8adaf",
+    "content-hash": "084d561338a93b917947f69adcc3a616",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1065,6 +1065,64 @@
             "time": "2023-04-17T16:00:37+00:00"
         },
         {
+            "name": "laravel-validation-rules/phone",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-validation-rules/phone.git",
+                "reference": "6801526b13e596c90d7cefff284ad5227f5d854a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-validation-rules/phone/zipball/6801526b13e596c90d7cefff284ad5227f5d854a",
+                "reference": "6801526b13e596c90d7cefff284ad5227f5d854a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.5|^5.0|^7.0|^9.0",
+                "phpunit/phpunit": "^6.3|^9.0|^10.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LVR\\Phone\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Tyler Arbon",
+                    "email": "tylercd100@gmail.com"
+                },
+                {
+                    "name": "Scott Robinson",
+                    "email": "scott@dor.ky",
+                    "homepage": "http://dor.ky"
+                }
+            ],
+            "description": "Validate that a phone number is in the correct format",
+            "homepage": "https://github.com/laravel-validation-rules/phone",
+            "keywords": [
+                "laravel",
+                "phone",
+                "tylercd100",
+                "validator"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-validation-rules/phone/issues",
+                "source": "https://github.com/laravel-validation-rules/phone/tree/1.9.0"
+            },
+            "time": "2024-04-16T12:30:49+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "7.x-dev",
             "source": {
@@ -1291,6 +1349,65 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.11.1"
             },
             "time": "2026-02-06T14:12:35+00:00"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "f5398544a9cd4804a42d09ce51735e37cd51ea2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/f5398544a9cd4804a42d09ce51735e37cd51ea2d",
+                "reference": "f5398544a9cd4804a42d09ce51735e37cd51ea2d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7.0",
+                "illuminate/filesystem": "^7.0",
+                "illuminate/support": "^7.0",
+                "php": "^7.2.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/",
+                    "Illuminate\\Foundation\\Auth\\": "auth-backend/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/ui/issues",
+                "source": "https://github.com/laravel/ui/tree/v2.4.0"
+            },
+            "time": "2020-09-11T15:31:52+00:00"
         },
         {
             "name": "league/commonmark",

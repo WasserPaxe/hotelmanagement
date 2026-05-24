@@ -279,6 +279,7 @@
         <!-- App js -->
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
         <script src="{{ asset('assets/js/bookingCustomer.js') }}"></script>
+        <script src="{{ asset('assets/js/nationality.js') }}"></script>
 
     </body>
 

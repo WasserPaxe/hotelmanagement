@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('admin.dash.index');
-});
+}); */
 
 //Customer Route
 
@@ -32,13 +33,13 @@ Route::get('/customer/list/pdf/', 'CustomerController@createListPdf')->name('cus
 
 
 //Categories Route
-
+Route::get('/room/categories/list', 'CategorieController@index')->name('categorie.index');
 Route::get('/room/categories', 'CategorieController@create')->name('categorie.create');
 Route::post('/room/categories/add', 'CategorieController@store')->name('categorie.store');
-Route::get('/room/categories/list', 'CategorieController@index')->name('categorie.index');
 Route::get('/room/categorie/edit/{id}', 'CategorieController@edit')->name('categorie.edit');
 Route::put('/room/categorie/update/{id}', 'CategorieController@update')->name('categorie.update');
 Route::delete('/room/categories/delete/{id}', 'CategorieController@destroy')->name('categorie.delete');
+Route::get('/room/categories/price', 'CategorieController@price')->name('categorie.price');
 
 //Room Route
 
@@ -63,6 +64,7 @@ Route::get('booking/details/{id}', 'BookingController@show')->name('booking.show
 Route::put('booking/update/{id}', 'BookingController@update')->name('booking.update');
 Route::delete('booking/delete/{id}', 'BookingController@destroy')->name('booking.delete');
 Route::get('/search-customers', 'BookingController@searchCustomers')->name('bookings.search.customers');
+Route::post('/booking/search', 'BookingController@search')->name('booking.search');
 
 
 //Payment Route
@@ -74,6 +76,7 @@ Route::get('payment/details/{id}', 'PaymentController@show')->name('payment.show
 Route::get('payment/edit{id}', 'PaymentController@edit')->name('payment.edit');
 Route::put('payment/update/{id}', 'PaymentController@update')->name('payment.update');
 Route::delete('payment/delete/{id}', 'PaymentController@destroy')->name('payment.destroy');
+Route::post('/payment/search', 'PaymentController@search')->name('payment.search');
 
 //Employee Route
 
@@ -100,3 +103,7 @@ Route::get('/space/list', 'SpaceController@index')->name('space.index');
 
 
 
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');

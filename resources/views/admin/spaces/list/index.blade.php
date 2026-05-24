@@ -46,34 +46,27 @@
                                                 
                                                 <th>Nome</th>
                                                 <th>Tipo de Sala</th>
+                                                <th>Capacidade</th>
                                                 <th>Condicoes</th>
-                                                <th>Equipamentos</th>
                                                 <th>Preco</th>
                                             </tr>
                                         </thead>
 
-                                       @forelse($spces as $space)     
+                                       @forelse($spaces as $space)     
                                         <tbody>
                                             <tr>
                                                 
-                                                <td>{{$room->name}}</td>
-                                                <td>{{$room->number}}</td>
-                                                <td>{{$room->floor}}</td>
-                                                <td>{{$room->phone}}</td>
-                                                <td>{{$room->categorie->name}}</td>
-                                                <td>{{$room->bed}}</td>
-                                                <td>{{ $room->meal }}</td>
-                                                <td style="max-width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                                                    {{$room->description}}
-                                                </td>
-                                                <td>{{$room->price}}</td>
-                                                <td>{{$room->status}}</td>
-                                               
+                                                <td>{{$space->name}}</td>
+                                                <td>{{$space->typespace->name}}</td>
+                                                <td>{{$space->capacity}}</td>
+                                                <td>{{$space->conditions}}</td>
+                                                <td>{{$space->price}}</td>
+                                                
                                                 <td>
                                                     <div class="d-flex align-items-center gap-1">
-                                                        <a href="{{ route('room.show', $room->id) }}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
-                                                        <a href="{{ route('room.edit', $room->id) }}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
-                                                        <form class="m-0 p-0" method="POST" action="{{ route('room.delete', $room->id) }}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i> </button> </form>
+                                                        <a href="{{-- {{ route('room.show', $room->id) }} --}}" ><button  class="btn btn-outline-info"><i class="bi bi-eye"></i></button></a>
+                                                        <a href="{{-- {{ route('room.edit', $room->id) }} --}}" ><button  class="btn btn-primary"><i class="bi bi-pencil"></i></button> </a>
+                                                        <form class="m-0 p-0" method="POST" action="{{-- {{ route('room.delete', $room->id) }} --}}">@method('DELETE') @csrf <button  class="btn btn-danger"><i class="bi bi-trash"></i> </button> </form>
                                                     </div>    
                                                 </td>
                                             

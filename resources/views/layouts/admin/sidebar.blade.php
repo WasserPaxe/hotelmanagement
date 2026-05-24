@@ -36,6 +36,33 @@
                         </li>
 
                         <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
+                                <i class="ri-group-2-line"></i>
+                                <span> Autenticação </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarPagesAuth">
+                                <ul class="side-nav-second-level">
+                                    {{-- <li>
+                                        <a href="{{ route('login') }}">Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('register') }}">Registar</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-logout.html">Logout</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-forgotpw.html">Esqueceu a Password</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-lock-screen.html">Lock Screen</a>
+                                    </li> --}}
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarUtentes" aria-expanded="false" aria-controls="sidebarUtentes" class="side-nav-link">
                                  <i class="ri-user-line"></i>
                                 <span> Utentes </span>
@@ -68,6 +95,25 @@
                                         <a href="{{ route('categorie.create') }}">Adicionar Categorias</a>
                                     </li>
                                 </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarpackage" aria-expanded="true" aria-controls="sidebarpackage" class="side-nav-link">
+                                <i class="bi bi-tags"></i>
+                                <span> Pacotes</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarpackage">
+                               <ul class="side-nav-second-level">
+                                    
+                                   <li>
+                                        <a href="{{ route('categorie.price') }}">Pacotes</a>
+                                    </li>
+                                    {{-- <li>
+                                        <a href="{{ route('categorie.create') }}">Adicionar Categorias</a>
+                                    </li> --}}
+                                </ul> 
                             </div>
                         </li>
 
@@ -133,7 +179,7 @@
                             </div>
                         </li>
 
-                        <li class="side-nav-item">
+                        {{-- <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebartypespaces" aria-expanded="true" aria-controls="sidebartypespaces" class="side-nav-link">
                                 <i class="bi bi-house-fill"></i>
                                 <span> Tipos de Sala</span>
@@ -150,7 +196,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebaremployees" aria-expanded="true" aria-controls="sidebaremployees" class="side-nav-link">
@@ -172,34 +218,9 @@
                         </li>
                         
 
-                        {{-- <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
-                                <i class="ri-group-2-line"></i>
-                                <span> Authentication </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarPagesAuth">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href="auth-login.html">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-register.html">Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-logout.html">Logout</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-forgotpw.html">Forgot Password</a>
-                                    </li>
-                                    <li>
-                                        <a href="auth-lock-screen.html">Lock Screen</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        
 
-                        <li class="side-nav-item">
+                       {{--  <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
                                 <i class="ri-layout-line"></i>
                                 <span class="badge bg-warning float-end">New</span>

@@ -62,7 +62,9 @@
                                             </tr>
                                         </tbody>
                                         @empty
-                                        
+                                            <tr>
+                                                <td colspan="12" class="text-center"> Sem Categorias</td>
+                                            </tr>
                                         @endforelse
                                     </table>
 

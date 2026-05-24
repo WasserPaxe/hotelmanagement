@@ -40,17 +40,17 @@
                         </button>
 
                         <!-- Topbar Search Form -->
-                        <div class="app-search d-none d-lg-block">
+                        {{-- <div class="app-search d-none d-lg-block">
                             <form>
                                 <div class="input-group">
                                     <input type="search" class="form-control" placeholder="Search...">
                                     <span class="ri-search-line search-icon text-muted"></span>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                     </div>
 
-                    <ul class="topbar-menu d-flex align-items-center gap-3">
+                    {{-- <ul class="topbar-menu d-flex align-items-center gap-3">
                         <li class="dropdown d-lg-none">
                             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
@@ -341,7 +341,7 @@
                             <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                                    <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" width="32" class="rounded-circle">
                                 </span>
                                 <span class="d-lg-block d-none">
                                     <h5 class="my-0 fw-normal">Thomson <i
@@ -385,6 +385,6 @@
                                 </a>
                             </div>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </div>
             </div>

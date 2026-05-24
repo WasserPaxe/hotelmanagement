@@ -16,10 +16,10 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('number');
-            $table->string('floor')->nullable();
+            $table->string('number')->nullable();
+            $table->string('floor');
             $table->string('description')->nullable();
-            $table->integer('bed')->nullable();
+            $table->integer('bed');
             $table->string('meal')->nullable();
             $table->string('phone')->nullable();
             $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');

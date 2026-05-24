@@ -8,7 +8,7 @@ use App\Models\Employee;
 class EmployeeController extends Controller
 {
     public function index(){
-        $employees = Employee::all();
+        $employees = Employee::orderBy('created_at', 'desc')->get();;
 
         return view('admin.employees.list.index', compact('employees'));
     }

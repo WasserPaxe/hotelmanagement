@@ -21,6 +21,8 @@ class CreatePaymentsTable extends Migration
             $table->date('paymentDate');
             $table->string('status');
             $table->string('currency');
+            $table->integer('days');
+            $table->string('obs')->nullable();
             $table->timestamps();
         });
     }

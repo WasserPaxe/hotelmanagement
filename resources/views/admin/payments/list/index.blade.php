@@ -41,6 +41,25 @@
                                     <h4 class="header-title">Todos Pagamentos</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                        <div class="dt-buttons btn-group flex-wrap"> 
+                                               {{--  @if(isset($customers))
+                                                    <a href="{{ route('customerList.pdf') }}"><button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="datatable-buttons" type="button">Relatório</button> </a>
+
+                                                @endif --}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 text-md-end"><div id="datatable-buttons_filter" class="dataTables_filter">
+                                            <form action="{{ route('payment.search') }}" method="POST">
+                                                @csrf
+                                                <label>
+                                                    <input type="search" name="search" class="form-control form-control-sm" placeholder="Filtro..." aria-controls="datatable-buttons">
+                                                </label>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
                                     <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
@@ -79,7 +98,9 @@
                                             </tr>
                                         </tbody>
                                        @empty
-                                        
+                                        <tr>
+                                                <td colspan="12" class="text-center"> Sem Pagamentos</td>
+                                            </tr>
                                         @endforelse
                                     </table>
 

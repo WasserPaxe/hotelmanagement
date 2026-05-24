@@ -11,6 +11,13 @@
                                                             
                                             </div>
 
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="example-textarea" name="categories" class="form-label">Descricao</label>
+                                                    <textarea class="form-control" name="categories" value="{{ old('description', $categories->description ?? '') }}" id="example-textarea"></textarea>
+                                               </div>
+                                            </div>
+
                                              
 
                                             

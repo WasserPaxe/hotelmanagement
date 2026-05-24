@@ -19,7 +19,7 @@ class BookingController extends Controller
         $rooms = Room::all();
         $customers = Customer::all();
         $categories = Categorie::all();
-        $bookings = Booking::all();
+        $bookings = Booking::orderBy('created_at', 'desc')->get();
 
         return view('admin.bookings.list.index', compact('bookings', 'customers', 'rooms','categories'));
 
@@ -36,38 +36,61 @@ class BookingController extends Controller
 
     public function store(Request $request){
         
-        $bookings = new Booking();
+        
 
           $validatedData = $this->validate($request,[
             'customer_id' => 'required',
             'room_id' => 'required',
             'status' => 'required',
-            'checkin'=> 'required',
-            'checkout' => 'required',
-            'description' => 'nullable',            
+            'checkin'=> 'required|date|after_or_equal:today',
+            'checkout' => 'required|date|after:checkin',
+                       
             ], 
             ['customer_id.required'=>'Campo obrigatório',
             'room_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
             'checkin.required'=>'Campo obrigatório',
+            'checkin.date'=>'Insira um formato de data válida',
+            'checkin.after_or_equal'=>'Coloque uma data actual ou futura', 
             'checkout'=>'Campo obrigatório',
+            'checkout.after'=>'Data de saída deve ser superior a de entrada',
         ]); 
 
-        $bookings->status = $request->status;
-        $bookings->description = $request->description;
-        $bookings->checkin = $request->checkin;
-        $bookings->checkout = $request->checkout;
-        $bookings->customer_id = $request->customer_id;
-        $bookings->room_id = $request->room_id;
+            //Guardar os dados em variaveis para facilitar a consulta
+            $room_id = $request->room_id;
+            $checkin = $request->checkin;
+            $checkout = $request->checkout;
 
         
+            $existsConflict = Booking::where('room_id', $room_id)//consultas nas reservas o quarto selecionado
+                             ->where(function ($query) use ($checkin, $checkout){
+                                $query->WhereBetween('checkin', [$checkin, $checkout])//procurar reserva se o checkin esta dentro da nova reserva
+                                ->orWhereBetween('checkout', [$checkin, $checkout])//procurar reserva se o checkout esta dentro da nova reserva
+                                ->orWhere(function($q) use ($checkin, $checkout){
+                                    //Caso a reserva existente cubra completamente o novo periodo ex: a nova(10-15), existente(05-20)
+                                    $q->where('checkin', '<=', $checkin)
+                                    ->where('checkout', '>=', $checkout);
+                                });
+                             })
+                             ->exists();//encerrar consulta e retorna true se tiver pelo menos uma reserva conflitante
+                             if($existsConflict){
+                                return back()->withInput()->withErrors(['room_id' => 'Este quarto não está disponível para as datas selecionadas']);
+                             }
+                             
+        $bookings = new Booking();
+        $bookings->status = $validatedData['status'];
+    
+        $bookings->checkin = $validatedData['checkin'];
+        $bookings->checkout = $validatedData['checkout'];
+        $bookings->customer_id = $validatedData['customer_id'];
+        $bookings->room_id = $validatedData['room_id'];
 
-        $bookings = Booking::create($validatedData);
+        $bookings->save();
         return redirect()->back()->with(['booking_created' => true, 'booking_id'=>$bookings->id, 'room_id'=>$bookings->room->price,]);
         
     }
 
-    public function show($id){
+    public function show(int $id){
 
        
         $categories = Categorie::all();
@@ -77,7 +100,7 @@ class BookingController extends Controller
         return view('admin.bookings.details.index', compact('bookings', 'rooms', 'customers', 'categories'));
     }
 
-    public function edit($id){
+    public function edit(int $id){
         
       
         $categories = Categorie::all();
@@ -90,12 +113,34 @@ class BookingController extends Controller
 
     public function update(Request $request){
 
+        $validatedData = $this->validate($request,[
+            'customer_id' => 'required',
+            'room_id' => 'required',
+            'status' => 'required',
+            'checkin'=> 'required|date|after_or_equal:today',
+            'checkout' => 'required|date|after:checkin',
+                       
+            ], 
+            ['customer_id.required'=>'Campo obrigatório',
+            'room_id.required'=>'Campo obrigatório',
+            'status.required'=>'Campo obrigatório',
+            'checkin.required'=>'Campo obrigatório',
+            'checkin.date'=>'Insira um formato de data válida',
+            'checkin.after_or_equal'=>'Coloque uma data actual ou futura', 
+            'checkout'=>'Campo obrigatório',
+            'checkout.after'=>'Data de saída deve ser superior a de entrada',
+        ]); 
+
+        
+
+
         $bookings = Booking::findOrFail($request->id)->update($request->all());
+        
         return redirect()->route('booking.index')->with('update', 'Reserva Atualizada com Sucesso');
 
     }
 
-    public function destroy($id){
+    public function destroy(int $id){
         $bookings = Booking::findOrFail($id)->delete();
         return redirect()->route('booking.index')->with('delete', 'Reserva Excluída com Sucesso');
         
@@ -113,5 +158,19 @@ class BookingController extends Controller
                          
     return response()->json($customers);
 }
+
+public function search(Request $request){
+        $bookings = Booking::where('checkin', 'LIKE', "%{$request->search}%")
+                               ->orWhere('checkout', 'LIKE', "%{$request->search}%")
+                                ->orWhere('status', 'LIKE', "%{$request->search}%")
+                                ->orWhereHAs('customer', function($query) use ($request){
+                                    $query->where('name', 'LIKE', "%{$request->search}%");
+                                })
+                                ->orWhereHAs('room', function($q) use ($request){
+                                    $q->where('number', 'LIKE', "%{$request->search}%");
+                                })
+                                ->get();
+        return view('admin.bookings.list.index', compact('bookings'));
+    }
    
 }

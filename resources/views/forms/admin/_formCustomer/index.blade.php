@@ -21,7 +21,7 @@
                                                <div class="mb-3">
                                                     <label for="simpleinput" name="docnumber" class="form-label">Nº Bilhete de Identidade/Passaporte</label>
                                                     <input type="text" id="simpleinput" name="docnumber" class="form-control @error('docnumber') is-invalid @enderror" value="{{ old('docnumber', $customers->docnumber ?? '') }}">
-                                                    @error('phone')
+                                                    @error('docnumber')
                                                         <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -34,7 +34,10 @@
                                                 
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email</label>
-                                                    <input type="email" id="example-email" name="email" class="form-control" placeholder="Email" value="{{ old('email', $customers->email ?? '') }}">
+                                                    <input type="text" id="example-email" name="email" class="form-control  @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email', $customers->email ?? '') }}">
+                                                    @error('email')
+                                                        <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="example-select" name="nationality" class="form-label">Nacionalidade</label>
@@ -47,7 +50,7 @@
                                                 </div>
                                                 
                                                 <div class="mb-3">
-                                                    <label for="example-select" name="gender" class="form-label">Genero</label>
+                                                    <label for="example-select" name="gender" class="form-label">Gênero</label>
                                                     <select class="form-select @error('gender') is-invalid @enderror"  name="gender" id="example-select">
                                                         <option value="">Selecione</option>
                                                         <option value="Masculino" {{ isset($customers->gender) && $customers->gender == 'Masculino' ? 'selected' : old('gender') }}>Masculino</option>

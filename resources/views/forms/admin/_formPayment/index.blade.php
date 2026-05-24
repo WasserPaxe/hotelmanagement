@@ -6,12 +6,12 @@
                                                     <input type="number" class="form-control" name='booking_id' value="{{ session('booking_id') }}" readonly>
                                                     
                                                 </div>
-
+                                              
                                                 {{-- <div class="mb-3">
                                                     <label for="example-select" name="totalPrice" class="form-label">Preço Total</label>
-                                                   <input type="number" class="form-control" name='' value= $totalPrice >
-                                                </div>
-                                             --}}
+                                                   <input type="number" class="form-control" name='totalPrice' value= {{ $totalPrice  }} readonly>
+                                                </div>  --}}
+                                             
                                                <div class="mb-3">
                                                     <label for="example-select" name="method" class="form-label">Metodo de Pagamento</label>
                                                     <select class="form-select @error('method') is-invalid @enderror"  name="method" id="example-select">
@@ -38,7 +38,10 @@
                                                     @enderror
                                                 </div>
 
-                
+                                                <div class="mb-3">
+                                                    <label for="example-textarea" name="obs" class="form-label">Descricao</label>
+                                                    <textarea class="form-control" name="obs" value="{{ old('obs', $payments->obs ?? '') }}" id="example-textarea"></textarea>
+                                               </div>
 
                                             </div>
 
@@ -70,6 +73,8 @@
                                                         <div class="position-absolute text-danger small" style="z-index:5;">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+
+                                                
                                                 
                                                 
                                                 

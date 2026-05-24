@@ -14,12 +14,13 @@ class PaymentController extends Controller
 {
     public function index(){
         
-        $payments = Payment::all();
+        $payments = Payment::orderBy('created_at', 'desc')->get();;
         $bookings = Booking::latest()->take(2)->get();
         return view('admin.payments.list.index', compact('payments', 'bookings'));
     }
 
     public function create(){
+        
         $categories = Categorie::all();
         $rooms = Room::all();
         $customers = Customer::all();
@@ -30,15 +31,17 @@ class PaymentController extends Controller
     public function store(Request $request){
            
             $bookings = Booking::with('room')->findOrFail($request->booking_id);
+            
             $payments = new Payment();
 
            $validatedData = $this->validate($request,[
             'booking_id' => 'required',
             'totalPrice' => 'required',
             'status' => 'required',
-            'paymentDate'=> 'required',
             'method' => 'required', 
             'currency' => 'required',
+            'days'=>'nullable',
+            'obs'=>'nullable|max:50',
             ], 
             ['booking_id.required'=>'Campo obrigatório',
             'totalPrice.required'=>'Campo obrigatório',
@@ -46,6 +49,7 @@ class PaymentController extends Controller
             'paymentDate.required'=>'Campo obrigatório',
             'method'=>'Campo obrigatório', 
             'currency'=>'Campo obrigatório',
+            'obs.max'=> 'O campo deve ter no máximo 50 caracteres'
         ]); 
         
         $checkin = Carbon::parse($bookings->checkin);
@@ -60,20 +64,24 @@ class PaymentController extends Controller
         $payments->status = $request->status;
         $payments->currency = $request->currency;
         $payments->method = $request->method;
-        $payments->paymentDate = $request->paymentDate;
+        $payments->paymentDate = now();
         $payments->totalPrice = $totalPrice;
+        $payments->days = $days;
+        $payments->obs = $request->obs;
 
         $payments->save();
 
         //Corrigir
         $bookings->update(['status' => 'Confirmado']);
+        $bookings->room->update(['status' => 'Ocupado']);
+       
     
         return redirect()->route('payment.index')->with('success', 'Reserva e Pagamento adicionado com Sucesso');
         
     }
 
     
-    public function show($id){
+    public function show(int $id){
         
         $bookings = Booking::all();
         $payments = Payment::findOrFail($id);
@@ -82,7 +90,7 @@ class PaymentController extends Controller
     }
 
     
-    public function edit($id){
+    public function edit(int $id){
 
         $payments = Payment::findOrFail($id);
          $categories = Categorie::all();
@@ -102,24 +110,46 @@ class PaymentController extends Controller
             'paymentDate'=> 'required',
             'method' => 'required', 
             'currency' => 'required',
-            
+            'days'=>'nullable',
+            'obs'=>'nullable|max:50',
             ], 
             ['booking_id.required'=>'Campo obrigatório',
             'totalPrice.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
             'paymentDate.required'=>'Campo obrigatório',
-            'method'=>'Campo obrigatório',
+            'method'=>'Campo obrigatório', 
             'currency'=>'Campo obrigatório',
-        ]);  
+            'obs.max'=> 'O campo deve ter no máximo 50 caracteres'
+        ]); 
+        
 
         $payments = Payment::findOrFail($request->id)->update($request->all());
         return redirect()->route('payment.index')->with('update', 'Pagamento Atualizado com Sucesso');
     }
 
-    public function destroy($id){
+    public function destroy(int $id){
         $payments = Payment::findOrFail($id);
         $payments->delete();
         return redirect()->route('payment.index')->with('delete', 'Pagamento Excluído com Sucesso');
+    }
+
+    public function search(Request $request){
+        $payments = Payment::where('status', 'LIKE', "%{$request->search}%")
+                                ->orWhere('method', 'LIKE', "%{$request->search}%")
+                                ->orWhere('paymentDate', 'LIKE', "%{$request->search}%")
+                                ->orWhere('currency', 'LIKE', "%{$request->search}%")
+                                ->orWhere('totalPrice', 'LIKE', "%{$request->search}%")
+                                ->orWhereHAs('booking', function($query) use ($request){
+                                    $query->where('id', 'LIKE', "%{$request->search}%");
+                                })
+                                ->orWhereHAs('booking.room', function($q) use ($request){
+                                    $q->where('number', 'LIKE', "%{$request->search}%");
+                                })
+                                ->orWhereHAs('booking.customer', function($sear) use ($request){
+                                    $sear->where('name', 'LIKE', "%{$request->search}%");
+                                })
+                                ->get();
+        return view('admin.payments.list.index', compact('payments'));
     }
     
 }

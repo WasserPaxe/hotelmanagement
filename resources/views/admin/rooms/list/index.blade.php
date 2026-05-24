@@ -43,8 +43,10 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
                                         <div class="dt-buttons btn-group flex-wrap"> 
-                                                
-                                                <a href="{{ route('roomList.pdf') }}"><button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="datatable-buttons" type="button"><i class="bi bi-file-pdf-fill"></i></button> </a> 
+                                                @if(isset($rooms))
+                                                    <a href="{{ route('roomList.pdf') }}"><button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="datatable-buttons" type="button">Relatório</button> </a>
+
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 text-md-end"><div id="datatable-buttons_filter" class="dataTables_filter">
@@ -104,6 +106,9 @@
                                             </tr>
                                         </tbody>
                                         @empty
+                                            <tr>
+                                                <td colspan="12" class="text-center"> Sem Quartos Cadastrados</td>
+                                            </tr>
                                         @endforelse
                                     </table>
 

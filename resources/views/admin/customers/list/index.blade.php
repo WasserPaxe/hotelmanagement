@@ -13,6 +13,7 @@
                                             <li class="breadcrumb-item"><a href="">Utentes</a></li>
                                             <li class="breadcrumb-item active"><a href="{{ route('customer.index') }}">Listar Utentes</a></li>
                                         </ol>
+                                        
                                     </div>
                                 </div>
                         
@@ -47,8 +48,10 @@
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
                                         <div class="dt-buttons btn-group flex-wrap"> 
-                                                
-                                                <a href="{{ route('customerList.pdf') }}"><button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="datatable-buttons" type="button"><i class="bi bi-file-pdf-fill"></i></button> </a>
+                                                @if(isset($customers))
+                                                    <a href="{{ route('customerList.pdf') }}"><button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="datatable-buttons" type="button">Relatório</button> </a>
+
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 text-md-end"><div id="datatable-buttons_filter" class="dataTables_filter">
@@ -93,6 +96,11 @@
                                             </tr>
                                         </tbody>
                                         @empty
+                                        
+                                            <tr>
+                                                <td colspan="12" class="text-center"> Sem Clientes Cadastrados</td>
+                                            </tr>
+                                        
                                         @endforelse
                                         
                                     </table>

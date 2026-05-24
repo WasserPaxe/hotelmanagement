@@ -12,9 +12,11 @@ class RoomController extends Controller
 {
     
     public function index(){
-        $rooms = Room::all();
-        $categories = Categorie::all();
-        return view('admin.rooms.list.index', compact('rooms', 'categories'));
+
+        $rooms = Room::orderBy('created_at', 'desc')->get();;
+        $totalRooms = Room::count();
+        
+        return view('admin.rooms.list.index', compact('rooms', 'totalRooms'));
     }
 
 
@@ -27,47 +29,59 @@ class RoomController extends Controller
     }
 
     public function store(Request $request){
+       
         $categories = Categorie::all(); 
+        
         $rooms = new Room();
 
            $validatedData = $this->validate($request,[
-           'number' => 'required',
-            'categorie_id' => 'required',
-            'status' => 'required',
-            'description' => 'nullable',
-            'price' => 'required',
+           'number' => 'required|unique:rooms,number',
+           'name' => 'nullable|unique:rooms,name',
+           'categorie_id' => 'required',
+           'status' => 'required',
+           'description' => 'nullable',
+           'price' => 'required|numeric| min:0',
+           'phone' => ['nullable', 'regex:/^\+[0-9]{1,3}[0-9]{7,14}$/'],
+           'floor'=>'nullable|',
+           'bed'=>'required',
+           'meal'=>'nullable',
             ], 
             [
             'number.required'=>'Campo obrigatório',
+            'number.unique' => 'Já tem um quarto com este número',
+            'name.unique' => 'Já tem um quarto com este nome',
             'categorie_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
             'price.required'=>'Campo obrigatório',
+            'price.numeric' => 'Digite formato de preço válido', 
+            'price.min' => 'Digite formato de preço válido (valores positivos)',
+            'phone.regex' => 'Digite um formato de telefone válido (ex.:(+244 9XXXXXXXX))',
+            'bed.required' => 'Campo obrigatório',
 
         ]); 
         
-        $rooms->phone = $request->phone;
-        $rooms->bed = $request->bed;
-        $rooms->meal = $request->meal;
-        $rooms->name = $request->name;
-        $rooms->number = $request->number;
-        $rooms->floor = $request->floor;
-        $rooms->price = $request->price;
-        $rooms->categorie_id = $request->categorie_id;
-        $rooms->status = $request->status;
-        $rooms->description = $request->description;
+        $rooms->phone = $validatedData['phone'];
+        $rooms->bed = $validatedData['bed'];
+        $rooms->meal = $validatedData['meal'];
+        $rooms->name = $validatedData['name'];
+        $rooms->number = $validatedData['number'];
+        $rooms->floor = $validatedData['floor'];
+        $rooms->price = $validatedData['price'];
+        $rooms->categorie_id = $validatedData['categorie_id'];
+        $rooms->status = $validatedData['status'];
+        $rooms->description = $validatedData['description'];
 
-        
         $rooms->save();
         return redirect()->route('room.index')->with('success', 'Quarto Adicionado com Sucesso');
     }
 
-     public function show($id){
+     public function show(int $id){
         $categories = Categorie::all();
         $rooms = Room::findOrFail($id);
         return view('admin.rooms.details.index', compact('rooms', 'categories'));
     }
 
-    public function edit($id){
+    public function edit(int $id){
         $categories = Categorie::all();
         $rooms = Room::findOrFail($id);
         return view('admin.rooms.edit.index', compact('rooms', 'categories'));
@@ -77,27 +91,37 @@ class RoomController extends Controller
 
         $rooms = Room::findOrFail($request->id);
 
-        $validatedData = $this->validate($request,[
-            'number' => 'required',
-            'categorie_id' => 'required',
-            'status' => 'required',
-            'description' => 'nullable',
-            'price' => 'required',
+       $validatedData = $this->validate($request,[
+           'number' => 'required|unique:rooms,number',
+           'name' => 'nullable|unique:rooms,name',
+           'categorie_id' => 'required',
+           'status' => 'required',
+           'description' => 'nullable',
+           'price' => 'required',
+           'phone' => ['nullable', 'regex:/^\+[0-9]{1,3}[0-9]{7,14}$/'],
+           'floor'=>'nullable|',
+           'bed'=>'required',
+           'meal'=>'nullable',
             ], 
             [
             'number.required'=>'Campo obrigatório',
+            'number.unique' => 'Já tem um quarto com este número',
+            'name.unique' => 'Já tem um quarto com este nome',
             'categorie_id.required'=>'Campo obrigatório',
             'status.required'=>'Campo obrigatório',
             'price.required'=>'Campo obrigatório',
+            'phone.regex' => 'Digite um formato de telefone válido (ex.:(+244 9XXXXXXXX))',
+            'bed.required' => 'Campo obrigatório',
 
-        ]);
+        ]); 
+        
 
         $rooms->update($request->all());
 
         return redirect()->route('room.index')->with('update', 'Quarto Atualizado com Sucesso');
     }
 
-    public function destroy($id){
+    public function destroy(int $id){
         
         $rooms = Room::findOrFail($id);
         $rooms->delete();
@@ -120,7 +144,7 @@ class RoomController extends Controller
         return view('admin.rooms.list.index', compact('rooms'));
     }
 
-    public function createDetailPdf($id){
+    public function createDetailPdf(int $id){
         $rooms = Room::findOrFail($id);
         $pdf = PDF::loadview('pdfs.rooms.details.index', compact('rooms'));
         return $pdf->download('room.pdf');

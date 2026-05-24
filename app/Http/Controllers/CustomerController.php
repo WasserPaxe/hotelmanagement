@@ -13,8 +13,10 @@ class CustomerController extends Controller
 
     public function index(){
         
-        $customers = Customer::latest()->get();
-        return view('admin.customers.list.index', compact('customers'));
+        $totalCustomers = Customer::count();
+        $customers = Customer::orderBy('created_at', 'desc')->get();;
+       
+        return view('admin.customers.list.index', compact('customers', 'totalCustomers'));
     }
 
     public function create(){
@@ -27,31 +29,40 @@ class CustomerController extends Controller
         $customers = new Customer();
 
          $validatedData = $this->validate($request,[
-            'name' => 'required',
-            'phone' => 'required',
-            'docnumber' => 'required',
+            'name' => 'required|string| max:255',
+            'email' => 'required|email|unique:customers,email',
+            'phone' => ['required', 'regex:/^\+[0-9]{1,3}[0-9]{7,14}$/'],
+            'nationality' => 'required',
+            'docnumber' => ['required', 'string', 'regex:/^([0-9]{9}[A-Z]{2}[0-9]{3}| [A-Z0-9]{6,12})$/', 'unique:customers,docnumber','max:20'],
             'gender' => 'required'], 
             
             ['name.required'=>'Campo obrigatório',
+            'email.required'=> 'Campo Obrigatório',
+            'email.email'=> 'Digite um email válido',
+            'email.unique' => 'Este email já está cadastrado',
             'phone.required'=>'Campo obrigatório',
+            'phone.regex' => 'Digite um formato de telefone válido (ex.:(+244 9XXXXXXXX))',
             'docnumber.required'=>'Campo obrigatório',
+            'docnumber.regex'=> 'Digite formato de BI ou Passaporte válido',
+            'docnumber.unique'=> 'Este documento já está cadastrado',
+            'docnumber.max' => 'O documento deve ter no máximo 20 caracteres',
             'gender.required'=>'Campo obrigatório',
 
         ]);
 
-        $customers->name = $request->name;
-        $customers->email = $request->email;
-        $customers->phone = $request->phone;
-        $customers->nationality = $request->nationality;
+        $customers->name = $validatedData['name'];
+        $customers->email = $validatedData['email'];
+        $customers->phone = $validatedData['phone'];
+        $customers->nationality = $validatedData['nationality'];
         
-        $customers->docnumber = $request->docnumber;
-        $customers->gender = $request->gender;
+        $customers->docnumber = $validatedData['docnumber'];
+        $customers->gender = $validatedData['gender'];
         $customers->save();
         
         return redirect()->route('customer.index')->with('success', 'Cliente Adicionado Com Sucesso');
     }
 
-    public function show($id){
+    public function show(int $id){
         
         $customers = Customer::findOrFail($id);
         return view('admin.customers.details.index', compact('customers'));
@@ -59,7 +70,7 @@ class CustomerController extends Controller
 
     
 
-    public function edit($id){
+    public function edit(int $id){
         
         $customers = Customer::findOrFail($id);
         return view('admin.customers.edit.index', compact('customers'));
@@ -68,14 +79,23 @@ class CustomerController extends Controller
     public function update(Request $request){
         
         $validatedData = $this->validate($request,[
-            'name' => 'required',
-            'phone' => 'required',
-            'docnumber' => 'required',
+            'name' => 'required|string| max:255',
+            'email' => 'required|email|unique:customers,email',
+            'phone' => ['required', 'regex:/^\+[0-9]{1,3}[0-9]{7,14}$/'],
+            'nationality' => 'required',
+            'docnumber' => ['required', 'string', 'regex:/^([0-9]{9}[A-Z]{2}[0-9]{3}| [A-Z0-9]{6,12})$/', 'unique:customers,docnumber','max:20'],
             'gender' => 'required'], 
             
             ['name.required'=>'Campo obrigatório',
+            'email.required'=> 'Campo Obrigatório',
+            'email.email'=> 'Digite um email válido',
+            'email.unique' => 'Este email já está cadastrado',
             'phone.required'=>'Campo obrigatório',
+            'phone.regex' => 'Digite um formato de telefone válido (ex.:(+244 9XXXXXXXX))',
             'docnumber.required'=>'Campo obrigatório',
+            'docnumber.regex'=> 'Digite formato de BI ou Passaporte válido',
+            'docnumber.unique'=> 'Este documento já está cadastrado',
+            'docnumber.max' => 'O documento deve ter no máximo 20 caracteres',
             'gender.required'=>'Campo obrigatório',
 
         ]);
@@ -85,7 +105,7 @@ class CustomerController extends Controller
 
     }
 
-    public function destroy($id){
+    public function destroy(int $id){
         $customers = Customer::findOrFail($id);
         $customers->delete();
         return redirect()->route('customer.index')->with('delete', 'Cliente Excluído Com Sucesso');
@@ -102,19 +122,23 @@ class CustomerController extends Controller
         return view('admin.customers.list.index', compact('customers'));
     }
 
-    public function createDetailPdf($id){
+    public function createDetailPdf(int $id){
         $customers = Customer::findOrFail($id);
         $pdf = PDF::loadview('pdfs.customers.details.index', compact('customers'));
         return $pdf->download('customer.pdf');
     }
 
     public function createListPdf(){
+        
         $customers = Customer::all();
+        
         $totalMens = Customer::where('gender', 'Masculino')->count();
         $totalWomens = Customer::where('gender', 'Feminino')->count();
         $totalCustomers = Customer::count();
+        
         $nationalityCustomers = Customer::select('nationality', DB::raw('count(*)as total'))->groupBy('nationality')->orderByDesc('total')->first();
         $genderCustomers = Customer::select('gender', DB::raw('count(*)as total'))->groupBy('gender')->orderByDesc('total')->first();
+        
         $pdf = PDF::loadview('pdfs.customers.list.index', compact('customers', 'totalCustomers', 'nationalityCustomers', 'genderCustomers', 'totalMens', 'totalWomens'));
         return $pdf->download('AllCustomer.pdf');
     }
